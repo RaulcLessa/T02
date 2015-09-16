@@ -1,4 +1,4 @@
-Ôªøpackage T02;
+package T02;
 
 import java.text.*;
 import java.util.*;
@@ -57,7 +57,7 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	// M√©todos GUILHERME
+	// MÈtodos GUILHERME
 	public boolean setCelular(String celular) {
 		valido = false;
 
@@ -99,7 +99,7 @@ public class Cliente {
 			this.timeFutebol = timeFutebol;
 		} else if ((timeFutebol.length() <= 50)
 				&& (timeFutebol
-						.matches("^[A-Za-z√°√†√¢√£√©√®√™√≠√Ø√≥√¥√µ√∂√∫√ß√±√Å√Ä√Ç√É√â√à√ç√è√ì√î√ï√ñ√ö√á√ë ]+$") == true)) {
+						.matches("^[A-Za-z·‡‚„ÈËÍÌÔÛÙıˆ˙ÁÒ¡¿¬√…»Õœ”‘’÷⁄«— ]+$") == true)) {
 			valido = true;
 			this.timeFutebol = timeFutebol;
 
@@ -118,7 +118,7 @@ public class Cliente {
 			this.estadoCivil = estadoCivil;
 		} else if ((estadoCivil.length() <= 50)
 				&& (estadoCivil
-						.matches("^[A-Za-z√°√†√¢√£√©√®√™√≠√Ø√≥√¥√µ√∂√∫√ß√±√Å√Ä√Ç√É√â√à√ç√è√ì√î√ï√ñ√ö√á√ë ]+$") == true)) {
+						.matches("^[A-Za-z·‡‚„ÈËÍÌÔÛÙıˆ˙ÁÒ¡¿¬√…»Õœ”‘’÷⁄«— ]+$") == true)) {
 			valido = true;
 			this.estadoCivil = estadoCivil;
 		} else {
@@ -166,9 +166,9 @@ public class Cliente {
 		return this.estadoCivil.toUpperCase();
 	}
 
-	// fim M√âTODOS GUILHERME
+	// fim M…TODOS GUILHERME
 
-	// M√âTODOS RAUL
+	// M…TODOS RAUL
 	public boolean setCPF(String CPF) {
 
 		valido = CPF.matches("\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2}");
@@ -196,22 +196,8 @@ public class Cliente {
 		return this.CNPJ;
 	}
 
-	public boolean setTipoPessoa(String tipoPessoa) {
-
-		if ((tipoPessoa.compareToIgnoreCase("Fisica") == 0)
-				|| (tipoPessoa.compareToIgnoreCase("F√≠sica") == 0)) {
-			this.tipoPessoa = tipoPessoa;
-			valido = true;
-		} else if ((tipoPessoa.compareToIgnoreCase("Juridica") == 0)
-				|| (tipoPessoa.compareToIgnoreCase("Jur√≠dica") == 0)) {
-			this.tipoPessoa = tipoPessoa;
-			valido = true;
-		} else {
-			this.tipoPessoa = tipoPessoa;
-			valido = false;
-		}
-
-		return valido;
+	public void setTipoPessoa(String tipoPessoa) {
+		this.tipoPessoa = tipoPessoa;
 	}
 
 	public String getTipoPessoa() {
@@ -226,13 +212,13 @@ public class Cliente {
 
 			numeroInt = Integer.parseInt(salario);
 			if (numeroInt < 788) {
-				this.salario = "Menor que um sal√°rio m√≠nimo.";
+				this.salario = "Menor que um sal·rio mÌnimo.";
 			} else if ((numeroInt > 788) && (numeroInt < 2364)) {
-				this.salario = "Entre 1 e 3 sal√°rios m√≠nimos.";
+				this.salario = "Entre 1 e 3 sal·rios mÌnimos.";
 			} else if ((numeroInt > 2364) && (numeroInt < 3940)) {
-				this.salario = "Entre 3 e 5 sal√°rios m√≠nimos.";
+				this.salario = "Entre 3 e 5 sal·rios mÌnimos.";
 			} else if (numeroInt > 3940) {
-				this.salario = "Maior que 5 sal√°rios m√≠nimos.";
+				this.salario = "Maior que 5 sal·rios mÌnimos.";
 			}
 		}
 
@@ -272,16 +258,16 @@ public class Cliente {
 
 	public String getNumero() {
 		return this.numero;
-	} // FIM M√âTODOS RAUL
+	} // FIM M…TODOS RAUL
 
-	// M√âTODOS JEAN
+	// M…TODOS JEAN
 
 	public String getCidade() {
 		return this.cidade;
 	}
 
 	public boolean setCidade(String cidade) {
-		boolean VC = cidade.matches("^([a-zA-Z√°√©√≠√≥√Å√â√ç√ì√ö√£√µ√É√ï√Ç√ä√¢√™√¥√î] ?){3,50}+");
+		boolean VC = cidade.matches("^([a-zA-Z·ÈÌÛ¡…Õ”⁄„ı√’¬ ‚ÍÙ‘] ?){3,50}+");
 		if (VC == true) {
 			this.cidade = cidade;
 		}
@@ -311,14 +297,14 @@ public class Cliente {
 
 		try {
 			DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-			formatter.setLenient(false); // se tolerancia se a data for inv√°lida
+			formatter.setLenient(false); // se tolerancia se a data for inv·lida
 			// retorna erro ex:31/02/2009
 
 			java.util.Date dataMinima = formatter.parse("01/01/1900");
 			java.util.Date dataMaxima = formatter.parse("31/12/2005");
 			java.util.Date dataParam = formatter.parse(data);
 
-			// comparando per√≠odo v√°lido
+			// comparando perÌodo v·lido
 			if ((dataParam.before(dataMinima)) || (dataParam.after(dataMaxima))) {
 				return false;
 			} else {
@@ -344,16 +330,16 @@ public class Cliente {
 		}
 		char dig13, dig14;
 		int sm, i, r, num, peso;
-		// "try" - protege o c√≥digo para eventuais erros de conversao de tipo
+		// "try" - protege o cÛdigo para eventuais erros de conversao de tipo
 		// (int)
 
 		try { // Calculo do 1o. Digito Verificador
 			sm = 0;
 			peso = 2;
-			for (i = 11; i >= 0; i--) { // converte o i-√©simo caractere do CNPJ
-				// em um n√∫mero:
+			for (i = 11; i >= 0; i--) { // converte o i-Èsimo caractere do CNPJ
+				// em um n˙mero:
 				// por exemplo, transforma o caractere '0' no inteiro 0
-				// (48 √© a posi√ß√£o de '0' na tabela ASCII)
+				// (48 È a posiÁ„o de '0' na tabela ASCII)
 				num = (int) (CNPJ.charAt(i) - 48);
 				sm = sm + (num * peso);
 				peso = peso + 1;
@@ -385,9 +371,9 @@ public class Cliente {
 				dig14 = '0';
 
 			else {
-				dig14 = (char) ((11 - r) + 48); // Verifica se os d√≠gitos
+				dig14 = (char) ((11 - r) + 48); // Verifica se os dÌgitos
 			} // calculados conferem com os
-				// d√≠gitos informados.
+				// dÌgitos informados.
 
 			if ((dig13 == CNPJ.charAt(12)) && (dig14 == CNPJ.charAt(13))) {
 				this.cnpj = CNPJ;
@@ -402,17 +388,17 @@ public class Cliente {
 
 	}
 
-	public String imprimeCNPJ(String CNPJ) { // m√°scara do CNPJ:
+	public String imprimeCNPJ(String CNPJ) { // m·scara do CNPJ:
 		// 99.999.999.9999-99
 		return (CNPJ.substring(0, 2) + "." + CNPJ.substring(2, 5) + "."
 				+ CNPJ.substring(5, 8) + "." + CNPJ.substring(8, 12) + "-" + CNPJ
 					.substring(12, 14));
-	} // FIM M√âTODOS JEAN
+	} // FIM M…TODOS JEAN
 
-	// M√âTODOS DIONAT√É
+	// M…TODOS DIONAT√
 	public boolean setNome(String nome) {
 		boolean validaNome = nome
-				.matches("^[a-zA-Z√Å√Ä√°√†√Ç√¢√É√£√ß√©√®√â√à√™√ä√≠√ç√≥√≤√ì√í√¥√î√µ√ï√∫√ö√º√ú]{1,50}+");
+				.matches("^[a-zA-Z¡¿·‡¬‚√„ÁÈË…»Í ÌÕÛÚ”“Ù‘ı’˙⁄¸‹]{1,50}+");
 		if (validaNome == true) {
 			this.nomeCompleto = nome;
 		}
@@ -421,7 +407,7 @@ public class Cliente {
 
 	public boolean setSobreNome(String sobreNome) {
 		boolean validaSobreNome = sobreNome
-				.matches("[a-zA-Z√Å√Ä√°√†√Ç√¢√É√£√ß√©√®√â√à√™√ä√≠√ç√≥√≤√ì√í√¥√î√µ√ï√∫√ö√º√ú ]{1,50}");
+				.matches("[a-zA-Z¡¿·‡¬‚√„ÁÈË…»Í ÌÕÛÚ”“Ù‘ı’˙⁄¸‹ ]{1,50}");
 		if (validaSobreNome == true) {
 			this.sobreNome = sobreNome;
 		}
@@ -439,7 +425,7 @@ public class Cliente {
 
 	public boolean setProfissao(String profissao) {
 		boolean validaProfissao = profissao
-				.matches("^([a-zA-Z√Å√Ä√°√†√Ç√¢√É√£√ß√©√®√â√à√™√ä√≠√ç√≥√≤√ì√í√¥√î√µ√ï√∫√ö√º√ú] ?){3,50}");
+				.matches("^([a-zA-Z¡¿·‡¬‚√„ÁÈË…»Í ÌÕÛÚ”“Ù‘ı’˙⁄¸‹] ?){3,50}");
 		if (validaProfissao == true) {
 			this.profissao = profissao;
 		}
@@ -489,15 +475,15 @@ public class Cliente {
 
 	public String getTipoEmail() {
 		return this.tipoEmail;
-	} // FIM M√âTODOS JEAN
+	} // FIM M…TODOS JEAN
 
 	// REGIS AMARAL
-	public static boolean validaAlfanumericos(String REF, int MAX) {
+	public boolean validaAlfanumericos(String REF, int MAX) {
 		boolean test = false;
 		if (REF.length() <= MAX) {// maximo 50 caracteres
 			// apenas alfanumericos
 			boolean alfanumericos = REF
-					.matches("[a-zA-Z0-9_ √ß√á√°√Å√©√†√Ä√â√≠√ç√≥√ì√∫√ö]{0,50}");
+					.matches("[a-zA-Z0-9_ Á«·¡È‡¿…ÌÕÛ”˙⁄]{0,50}");
 			if (alfanumericos == true) {
 				test = true;
 			}
@@ -531,7 +517,7 @@ public class Cliente {
 	public boolean setUF(String UF) {
 		boolean test = false;
 		if (UF.length() == 2) {// Apenas dois caracteres
-			UF = UF.toUpperCase(); // aceito que usu√°rio digite em minuscula
+			UF = UF.toUpperCase(); // aceito que usu·rio digite em minuscula
 			boolean sigla = UF
 					.matches("AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|SC|SE|TO");
 			if (sigla == true) {
@@ -601,7 +587,7 @@ public class Cliente {
 		return this.InfoAdicionais;
 	}// FIM METODOS REGIS
 
-	// ANDR√â
+	// ANDR…
 	public boolean setComp(String comp) {
 		boolean alfanumerico = comp.matches("[a-zA-Z0-9 ]{0,20}");
 		if (alfanumerico) {
@@ -638,7 +624,7 @@ public class Cliente {
 
 		qDig = cpftemp.length(); // Quantidade total de caracteres
 
-		// Gravar posi√ß√£o dos caracteres
+		// Gravar posiÁ„o dos caracteres
 		try {
 			dig1 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 11)));
 			dig2 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 10)));
@@ -655,7 +641,7 @@ public class Cliente {
 			return false;
 		}
 
-		// C√°lculo para o primeiro d√≠gito validador
+		// C·lculo para o primeiro dÌgito validador
 		dv1 = dig1 + (dig2 * 2) + (dig3 * 3) + (dig4 * 4) + (dig5 * 5)
 				+ (dig6 * 6) + (dig7 * 7) + (dig8 * 8) + (dig9 * 9);
 		dv1 = dv1 % 11;
@@ -665,7 +651,7 @@ public class Cliente {
 			dv1 = 0; // Se o resto for igual a 10, dv1 igual a zero
 		}
 
-		// C√°lculo para o segundo d√≠gito validador
+		// C·lculo para o segundo dÌgito validador
 		dv2 = dig2 + (dig3 * 2) + (dig4 * 3) + (dig5 * 4) + (dig6 * 5)
 				+ (dig7 * 6) + (dig8 * 7) + (dig9 * 8) + (dv1 * 9);
 		dv2 = dv2 % 11;
@@ -675,7 +661,7 @@ public class Cliente {
 			dv2 = 0; // Se o resto for igual a 10, dv2 igual a zero
 		}
 
-		// Valida√ß√£o dos d√≠gitos validadores, ap√≥s o c√°lculo realizado
+		// ValidaÁ„o dos dÌgitos validadores, apÛs o c·lculo realizado
 		if (dig10 == dv1 && dig11 == dv2) {
 
 			this.cpf = cpf;
@@ -712,6 +698,6 @@ public class Cliente {
 
 	public String getCpf() {
 		return this.cpf;
-	}// FIM METODOS ANDR√â
+	}// FIM METODOS ANDR…
 
 }

@@ -1,4 +1,4 @@
-ï»¿package T02;
+package T02;
 
 public class Programa {
 	public static int novaidcliente = 0;
@@ -14,10 +14,10 @@ public class Programa {
 		obj.CadastrarLogradouro();
 		obj.CadastrarNumero();
 		if ((pessoa.compareToIgnoreCase("Fisica") == 0)
-				|| pessoa.compareTo("FÃ­sica") == 0) {
+				|| pessoa.compareTo("Física") == 0) {
 			obj.CadastrarCPF();
 		} else if ((pessoa.compareToIgnoreCase("Juridica")) == 0
-				|| pessoa.compareToIgnoreCase("JurÃ­dica") == 0) {
+				|| pessoa.compareToIgnoreCase("Jurídica") == 0) {
 			obj.CadastrarCNPJ();
 
 		}
@@ -33,7 +33,7 @@ public class Programa {
 		obj.menuCep();
 		obj.menuData();
 
-		// DIONATÃƒ
+		// DIONATÃ
 		obj.gravaDadosNome();
 		obj.gravaDadosSegundoNome();
 		obj.gravaDadosSexo();
@@ -41,7 +41,7 @@ public class Programa {
 		obj.gravaDadosRG();
 		obj.gravaDadosEmail();
 
-		// RÃ‰GIS
+		// RÉGIS
 
 		obj.NovaID();
 		obj.DataCad();
@@ -54,7 +54,7 @@ public class Programa {
 		obj.CadastroComp();
 		obj.CadastroBairro();
 
-		// ExibiÃ§Ã£o do Cadastro
+		// Exibição do Cadastro
 		obj.exibeCadastro();
 	}
 }

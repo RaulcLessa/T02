@@ -1,4 +1,4 @@
-Ôªøpackage T02;
+package T02;
 
 import java.util.*;
 
@@ -12,7 +12,7 @@ public class Cadastro {
 
 	// GUILHERME
 	/*
-	 * M√©todos que recebem as entradas a serem validadas.
+	 * MÈtodos que recebem as entradas a serem validadas.
 	 */
 
 	public void CadastraEstadoCivil() {
@@ -57,7 +57,7 @@ public class Cadastro {
 		String celular;
 		boolean eCel = false;
 		do {
-			System.out.println("Digite seu celular com o DDD (apenas n¬∫s):");
+			System.out.println("Digite seu celular com o DDD (apenas n∫s):");
 			celular = entrada.nextLine();
 
 			if (c1.setCelular(celular) == true) {
@@ -75,7 +75,7 @@ public class Cadastro {
 		boolean eTel = false;
 		do {
 			System.out
-					.println("Digite seu telefone fixo com o DDD (apenas n¬∫s):");
+					.println("Digite seu telefone fixo com o DDD (apenas n∫s):");
 			telFixo = entrada.nextLine();
 
 			if (c1.setTelFixo(telFixo) == true) {
@@ -88,7 +88,7 @@ public class Cadastro {
 	}
 
 	/*
-	 * M√©todos para a exibi√ß√£o das entradas (validadas e formatadas).
+	 * MÈtodos para a exibiÁ„o das entradas (validadas e formatadas).
 	 */
 
 	public void exibeCadastro() {
@@ -96,7 +96,7 @@ public class Cadastro {
 		System.out.println("Nome Completo: " + c1.getNome() + " "
 				+ c1.getSobreNome());
 		System.out.println("Sexo: " + c1.getSexo());
-		System.out.println("Profiss√£o: " + c1.getProfissao());
+		System.out.println("Profiss„o: " + c1.getProfissao());
 		System.out.println("RG: " + c1.getRG());
 		System.out.println("Tipo de Pessoa: " + c1.getTipoPessoa());
 		System.out.println("E-mail: " + c1.getTipoEmail());
@@ -105,7 +105,7 @@ public class Cadastro {
 		System.out.println("Celular: " + c1.getCelular());
 		System.out.println("Telefone Residencial: " + c1.getTelFixo());
 		System.out.println("Logradouro: " + c1.getLogradouro());
-		System.out.println("N√∫mero: " + c1.getNumero());
+		System.out.println("N˙mero: " + c1.getNumero());
 		System.out.println("Complemento: " + c1.getComp());
 		System.out.println("Bairro: " + c1.getBairro());
 		System.out.println("Cep " + c1.getCep());
@@ -118,13 +118,13 @@ public class Cadastro {
 		System.out.println("ID: " + c1.getID());
 		System.out.println("Data do Cadastro: " + c1.getDataCad());
 		System.out.println("Referencia: " + c1.getReferencia());
-		System.out.println("Informa√ß√µes adicionais: " + c1.getInfoAdicionais());
+		System.out.println("InformaÁıes adicionais: " + c1.getInfoAdicionais());
 		System.out.println("Montante gasto: " + c1.getMontante());
 
 	}
 
 	public void EntradaInvalida() {
-		System.out.println("ENTRADA INV√ÅLIDA!");
+		System.out.println("ENTRADA INV¡LIDA!");
 	}
 
 	// RAUL
@@ -152,31 +152,27 @@ public class Cadastro {
 						break;
 
 					case "2":
-						System.out.println("Voc√™ saiu do programa.");
+						System.out.println("VocÍ saiu do programa.");
 						System.exit(0);
 						break;
 
 					default:
 						System.out
-								.println("Fun√ß√£o inexistente ou n√£o suportada");
+								.println("FunÁ„o inexistente ou n„o suportada");
 
 					}
 				} catch (InputMismatchException erro1) {
 					System.out
-							.println("Por favor insira um n√∫mero inteiro de 1 a 2 de acordo com a fun√ß√£o que deseja realizar.");
+							.println("Por favor insira um n˙mero inteiro de 1 a 2 de acordo com a funÁ„o que deseja realizar.");
 				}
 
 			} while (func1 == false);
 
 			do {
 				System.out
-						.println("Digite o tipo de pessoa <f√≠sica ou jur√≠dica> : ");
+						.println("Digite o tipo de pessoa <fÌsica ou jurÌdica> : ");
 				tipoPessoa = entrada.nextLine();
-				ok = c1.setTipoPessoa(tipoPessoa);
-
-				if (ok == false) {
-					System.out.println("Digite um tipo de pessoa v√°lida!");
-				}
+				ok = true;
 
 			} while (ok == false);
 
@@ -189,7 +185,7 @@ public class Cadastro {
 	public void CadastrarSalario() {
 		do {
 
-			System.out.println("Digite o sal√°rio do cliente: ");
+			System.out.println("Digite o sal·rio do cliente: ");
 			salario = entrada.nextLine();
 			ok = c1.setSalario(salario);
 
@@ -198,7 +194,7 @@ public class Cadastro {
 			}
 
 		} while (ok == false);
-		System.out.println("Sal√°rio inserido com sucesso!");
+		System.out.println("Sal·rio inserido com sucesso!");
 	}
 
 	public void CadastrarLogradouro() {
@@ -223,11 +219,11 @@ public class Cadastro {
 		String numero;
 
 		do {
-			System.out.println("Digite o n√∫mero do endere√ßo do cliente: ");
+			System.out.println("Digite o n˙mero do endereÁo do cliente: ");
 			numero = entrada.nextLine();
 			if (c1.setNumero(numero) == true) {
 				c1.setNumero(numero);
-				System.out.println("N√∫mero adicionado com sucesso!");
+				System.out.println("N˙mero adicionado com sucesso!");
 				ok = true;
 			} else {
 				EntradaInvalida();
@@ -243,18 +239,18 @@ public class Cadastro {
 		do {
 
 			if ((c1.getTipoPessoa().compareToIgnoreCase("Fisica") == 0)
-					|| (c1.getTipoPessoa().compareToIgnoreCase("F√≠sica") == 0)) {
-				System.out.println("Digite o n√∫mero do seu CPF: ");
+					|| (c1.getTipoPessoa().compareToIgnoreCase("FÌsica") == 0)) {
+				System.out.println("Digite o n˙mero do seu CPF: ");
 				CPF = entrada.nextLine();
 				ok = c1.setCpf(CPF);
 				if (ok == true) {
-					System.out.println("N√∫mero de CPF adicionado com suceso");
+					System.out.println("N˙mero de CPF adicionado com suceso");
 				} else {
 					EntradaInvalida();
 				}
 			} else {
 				System.out
-						.println("Fun√ß√£o dispon√≠vel apenas para pessoas f√≠sicas");
+						.println("FunÁ„o disponÌvel apenas para pessoas fÌsicas");
 			}
 		} while (ok == false);
 	}
@@ -263,7 +259,7 @@ public class Cadastro {
 
 		do {
 			if ((c1.getTipoPessoa().compareToIgnoreCase("Juridica") == 0)) {
-				System.out.println("Digite o n√∫mero do seu CNPJ: ");
+				System.out.println("Digite o n˙mero do seu CNPJ: ");
 				CNPJ = entrada.nextLine();
 
 				ok = c1.setCNPJ(CNPJ);
@@ -271,10 +267,10 @@ public class Cadastro {
 				if (ok == true) {
 					System.out.println("CNPJ cadastrado com sucesso.");
 				} else
-					System.out.println("Digite um n√∫mero de CNPJ v√°lido.");
+					System.out.println("Digite um n˙mero de CNPJ v·lido.");
 			} else {
 				System.out
-						.println("Fun√ß√£o suportada apenas para pessoas jur√≠dicas.");
+						.println("FunÁ„o suportada apenas para pessoas jurÌdicas.");
 			}
 
 		} while (ok == false);
@@ -292,7 +288,7 @@ public class Cadastro {
 			if (c1.setCidade(cidade) == false) {
 				EntradaInvalida();
 			} else {
-				System.out.println("Cidade v√°lida.");
+				System.out.println("Cidade v·lida.");
 			}
 		} while (c1.setCidade(cidade) == false);
 
@@ -305,7 +301,7 @@ public class Cadastro {
 
 		if (c1.setCep(cep) == false) {
 			System.out
-					.println("Cep inv√°lido. Deseja cadastrar cep? (Digite Sim/N√£o)");
+					.println("Cep inv·lido. Deseja cadastrar cep? (Digite Sim/N„o)");
 			String op = entrada.nextLine();
 			op = op.toLowerCase();
 			switch (op) {
@@ -319,12 +315,12 @@ public class Cadastro {
 				} while (c1.setCep(cep) == false);
 				break;
 
-			case "n√£o":
-				System.out.println("Cep n√£o cadastrado");
+			case "n„o":
+				System.out.println("Cep n„o cadastrado");
 
 				break;
 			default:
-				System.out.println("Nada digitado,cep n√£o cadastrado");
+				System.out.println("Nada digitado,cep n„o cadastrado");
 				break;
 
 			}
@@ -344,7 +340,7 @@ public class Cadastro {
 		} else {
 
 			System.out
-					.println("Data inv√°lida,deseja cadastrar uma data? sim/n√£o");
+					.println("Data inv·lida,deseja cadastrar uma data? sim/n„o");
 			String op;
 			op = entrada.nextLine();
 			op = op.toLowerCase();
@@ -361,11 +357,11 @@ public class Cadastro {
 				} while (c1.setDataNasc(data) == false);
 
 				break;
-			case "n√£o":
-				System.out.println("Data n√£o cadastrada");
+			case "n„o":
+				System.out.println("Data n„o cadastrada");
 				break;
 			default:
-				System.out.println("Nada digitado,data n√£o cadastrada");
+				System.out.println("Nada digitado,data n„o cadastrada");
 				break;
 			}
 
@@ -378,17 +374,17 @@ public class Cadastro {
 			CNPJ = entrada.nextLine();
 			c1.setCnpj(CNPJ);
 			if (c1.setCnpj(CNPJ) == false) {
-				System.out.println("CNPJ inv√°lido!");
+				System.out.println("CNPJ inv·lido!");
 				System.out.println("Campo obrigatorio!");
 			}
 		} while (c1.setCnpj(CNPJ) == false);
-		System.out.println("Cnpj v√°lido");
+		System.out.println("Cnpj v·lido");
 
 	}// FIM JEAN
 
-	// DIONAT√É
+	// DIONAT√
 	public boolean gravaDadosNome() {
-		// Este √© o m√©todo q aciona o m√©todo de validar o Nome do Cliente
+		// Este È o mÈtodo q aciona o mÈtodo de validar o Nome do Cliente
 		String nome;
 		boolean bNome = false;
 		do {
@@ -406,7 +402,7 @@ public class Cadastro {
 
 	public boolean gravaDadosSegundoNome() {
 		String sobreNome;
-		// Este √© o m√©todo q aciona o m√©todo de validar o Sobrenome do Cliente
+		// Este È o mÈtodo q aciona o mÈtodo de validar o Sobrenome do Cliente
 		boolean bSobrenome = false;
 		do {
 			System.out.println("Digite o Sobrenome do Cliente:");
@@ -423,7 +419,7 @@ public class Cadastro {
 
 	public boolean gravaDadosSexo() {
 		String sexo;
-		// Este √© o m√©todo q aciona o m√©todo de validar o Sexo do Cliente
+		// Este È o mÈtodo q aciona o mÈtodo de validar o Sexo do Cliente
 		boolean bSexo = false;
 		do {
 			System.out
@@ -441,10 +437,10 @@ public class Cadastro {
 
 	public boolean gravaDadosProfissao() {
 		String profissao;
-		// Este √© o m√©todo q aciona o m√©todo de validar a Profiss√£o do Cliente
+		// Este È o mÈtodo q aciona o mÈtodo de validar a Profiss„o do Cliente
 		boolean bProfissao = false;
 		do {
-			System.out.println("Profiss√£o do Cliente:");
+			System.out.println("Profiss„o do Cliente:");
 			profissao = entrada.nextLine();
 			profissao = profissao.toUpperCase();
 			if (c1.setProfissao(profissao)) {
@@ -458,7 +454,7 @@ public class Cadastro {
 
 	public boolean gravaDadosRG() {
 		String RG;
-		// Este √© o m√©todo q aciona o m√©todo de validar RG
+		// Este È o mÈtodo q aciona o mÈtodo de validar RG
 		boolean bRG = false;
 		do {
 			System.out.println("RG do Cliente:");
@@ -482,7 +478,7 @@ public class Cadastro {
 			bmail = true;
 		}
 		else {
-			System.out.println("Email n√£o cadastrado!");
+			System.out.println("Email n„o cadastrado!");
 			bmail = false;
 		}
 
@@ -510,14 +506,14 @@ public class Cadastro {
 		entrada = new Scanner(System.in);
 		do {
 			System.out
-					.println("REFER√äNCIA: \n(Use letras e n√∫meros, maximo de 50 caracteres incluindo espa√ßos)");
+					.println("REFER NCIA: \n(Use letras e n˙meros, maximo de 50 caracteres incluindo espaÁos)");
 			EndReferencias = entrada.nextLine();
 
 			if (c1.setReferencia(EndReferencias, 50)) {
 				tREF = true;
 			} else {
 				System.out
-						.println("Aten√ß√£o, voc√™ precisa digitar conforme o solicitado, tente novamente. \n \n");
+						.println("AtenÁ„o, vocÍ precisa digitar conforme o solicitado, tente novamente. \n \n");
 			}
 		} while (tREF == false);
 	}
@@ -528,14 +524,14 @@ public class Cadastro {
 		entrada = new Scanner(System.in);
 		do {
 			System.out
-					.println("Informa√ß√µes adicionais: \n(Use letras e n√∫meros, maximo de 300 caracteres incluindo espa√ßos)");
+					.println("InformaÁıes adicionais: \n(Use letras e n˙meros, maximo de 300 caracteres incluindo espaÁos)");
 			InfoAdicionais = entrada.nextLine();
 
 			if (c1.setInfoAdicionais(InfoAdicionais, 300)) {
 				tInfo = true;
 			} else {
 				System.out
-						.println("Aten√ß√£o, voc√™ precisa digitar conforme o solicitado, tente novamente. \n \n");
+						.println("AtenÁ„o, vocÍ precisa digitar conforme o solicitado, tente novamente. \n \n");
 			}
 		} while (tInfo == false);
 	}
@@ -568,7 +564,7 @@ public class Cadastro {
 				tUF = true;
 			} else {
 				System.out
-						.println("Aten√ß√£o, voc√™ precisa digitar conforme o solicitado, tente novamente. \n \n");
+						.println("AtenÁ„o, vocÍ precisa digitar conforme o solicitado, tente novamente. \n \n");
 			}
 		} while (tUF == false);
 	}// FIM REGIS
@@ -582,15 +578,15 @@ public class Cadastro {
 
 		{
 			System.out
-					.println("Digite o seu Complemento (Apenas alfanum√©ricos): ");
+					.println("Digite o seu Complemento (Apenas alfanumÈricos): ");
 			String comp = entrada.nextLine();
 
 			if (c1.setComp(comp)) {
 				System.out
-						.println("Voc√™ realizou o cadastro do Complemento com sucesso!\n");
+						.println("VocÍ realizou o cadastro do Complemento com sucesso!\n");
 				execComp = true;
 			} else {
-				System.out.println("Dados inv√°lidos, tente novamente! \n");
+				System.out.println("Dados inv·lidos, tente novamente! \n");
 			}
 		} while (execComp == false);
 	}
@@ -602,15 +598,15 @@ public class Cadastro {
 		Boolean execbairro = false;
 
 		do {
-			System.out.println("Digite o seu Bairro (Apenas alfanum√©ricos): ");
+			System.out.println("Digite o seu Bairro (Apenas alfanumÈricos): ");
 			String bairro = entrada.nextLine();
 
 			if (c1.setBairro(bairro)) {
 				System.out
-						.println("Voc√™ realizou o cadastro do Bairro com sucesso!\n");
+						.println("VocÍ realizou o cadastro do Bairro com sucesso!\n");
 				execbairro = true;
 			} else {
-				System.out.println("Dados inv√°lidos, tente novamente! \n");
+				System.out.println("Dados inv·lidos, tente novamente! \n");
 			}
 
 		} while (execbairro == false);

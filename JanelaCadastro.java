@@ -5,11 +5,13 @@ import java.awt.event.*;
 import java.text.ParseException;
 
 import javax.swing.*;
+import javax.swing.text.AbstractDocument;
 import javax.swing.text.MaskFormatter;
 
 @SuppressWarnings("serial")
 public class JanelaCadastro extends JFrame implements ActionListener {
 	
+	Cliente c = new Cliente();
 	
 	//Labels
 	private JLabel lblSexo;
@@ -51,8 +53,8 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 	private JTextField fieldEmail;
 	private JTextField fieldMontante;
 	
-	//TextPane
-	private JTextPane textPaneInfoAd;
+	//TextPArea
+	private JTextArea textAreaInfoAd;
 	
 	//Radioutton
 	private JRadioButton rdbtnMasculino;
@@ -194,10 +196,13 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		lblInformaesAdicionais.setBounds(249, 480, 144, 14);
 		content.add(lblInformaesAdicionais);
 		
-		//Text Pane
-		textPaneInfoAd = new JTextPane();
-		textPaneInfoAd.setBounds(392, 470, 254, 86);
-		content.add(textPaneInfoAd);
+		//Text Area
+		int maxChars = 300;
+		textAreaInfoAd = new JTextArea();
+		AbstractDocument pDoc = (AbstractDocument)textAreaInfoAd.getDocument();
+		pDoc.setDocumentFilter(new DocumentSizeFilter(maxChars));
+		textAreaInfoAd.setBounds(392, 470, 254, 86);
+		content.add(textAreaInfoAd);
 		
 		//Button Groups
 		ButtonGroup groupPessoa = new ButtonGroup();
@@ -208,7 +213,7 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		rdbtnFisica.setBounds(143, 386, 71, 20);
 		groupPessoa.add(rdbtnFisica);
 		content.add(rdbtnFisica);
-
+		
 		rdbtnJridi = new JRadioButton("Jurídica");
 		rdbtnJridi.setBounds(216, 386, 104, 20);
 		groupPessoa.add(rdbtnJridi);
@@ -465,6 +470,8 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		setVisible(true);
 
 	}
+	
+	
 
 	public static void main(String[] args) throws ParseException {
 		new JanelaCadastro();
@@ -476,7 +483,55 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		
 		String comand = (String) e.getActionCommand();
 		if(comand.equals("Salvar")){
-			JOptionPane.showMessageDialog(btnSalvar, "Função não suportada ainda");
+			JOptionPane.showMessageDialog(boxEstadoCivil, "Função ainda não suportada");
+			
+			//Seta Informações Adicionais
+			c.setInfoAdicionais(textAreaInfoAd.getText(), 300);
+			
+			//Seta Pessoa Física ou Jurídica
+			if(rdbtnFisica.isSelected()){
+				c.setTipoPessoa("Física");
+			}
+			else if(rdbtnJridi.isSelected()){
+				c.setTipoPessoa("Jurídica");
+			}
+			
+			//Seta Sexo Masuclino ou Feminino
+			if(rdbtnMasculino.isSelected()){
+				c.setSexo("Masculino");
+			}
+			else if(rdbtnFeminino.isSelected()){
+				c.setSexo("Feminino");
+			}
+			
+			//Seta Estado Civil
+			c.setEstadoCivil((String) boxEstadoCivil.getSelectedItem());
+			
+			//Seta UF
+			c.setUF((String) comboBoxUf.getSelectedItem());
+			
+			//Seta Faixa Salarial
+			c.setSalario((String) comboBoxFxSal.getSelectedItem());
+			
+			c.setNome(fieldNome.getText());
+			c.setBairro(fieldBairro.getText());
+			c.setCelular(fieldFormatTelCel.getText());
+			c.setCep(fieldFormatCep.getText());
+			c.setCidade(fieldCidade.getText());
+			c.setCnpj(fieldFormatCnpj.getText());
+			c.setComp(fieldComplemento.getText());
+			c.setCpf(fieldFormatCpf.getText());
+			c.setDataNasc(fieldFormatDataNasc.getText());
+			c.setLogradouro(fieldLogradouro.getText());
+			c.setMontante(fieldMontante.getText());
+			c.setNumero(fieldNum.getText());
+			c.setProfissao(fieldProf.getText());
+			c.setReferencia(fieldRef.getText(), 300);
+			c.setRG(fieldFormatRg.getText());
+			c.setTelFixo(fieldFormatTelRes.getText());
+			c.setTimeFutebol(fieldTime.getText());
+			c.setTipoEmail(fieldEmail.getText());
+			
 		}
 		
 		if(comand.equals("Sair")){
