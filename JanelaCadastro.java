@@ -88,6 +88,7 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 	private MaskFormatter maskTelCel;
 	private MaskFormatter maskCpf;
 	private MaskFormatter maskCnpj;
+	protected Container content = getContentPane();
 	
 	//Objeto
 	protected Cliente c;
@@ -97,7 +98,7 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 
 		c = new Cliente();
 
-		Container content = getContentPane();
+		content = getContentPane();
 		content.setLayout(null);
 		
 		//Labels
@@ -476,6 +477,35 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 
 	}
 	
+	private void limparTela(){
+		
+		//Limpar Campos de JTextField
+		fieldBairro.setText(null);
+		fieldCidade.setText(null);
+		fieldComplemento.setText(null);
+		fieldEmail.setText(null);
+		fieldFormatCep.setText(null);
+		fieldFormatCnpj.setText(null);
+		fieldFormatCpf.setText(null);
+		fieldFormatDataNasc.setText(null);
+		fieldFormatRg.setText(null);
+		fieldFormatTelCel.setText(null);
+		fieldFormatTelRes.setText(null);
+		fieldLogradouro.setText(null);
+		fieldMontante.setText(null);
+		fieldNome.setText(null);
+		fieldNum.setText(null);
+		fieldProf.setText(null);
+		fieldRef.setText(null);
+		fieldTime.setText(null);
+		
+		//Limpar RadioButtons
+		
+		rdbtnFeminino.setSelected(false);
+		rdbtnMasculino.setSelected(false);
+		rdbtnFisica.setSelected(false);
+		rdbtnJridi.setSelected(false);
+	}
 	
 
 	public static void main(String[] args) throws ParseException {
@@ -488,7 +518,6 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		
 		String comand = (String) e.getActionCommand();
 		if(comand.equals("Salvar")){
-			JOptionPane.showMessageDialog(boxEstadoCivil, "Função ainda não suportada");
 			
 			//Seta Informações Adicionais
 			c.setInfoAdicionais(textAreaInfoAd.getText(), 300);
@@ -521,9 +550,9 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 			c.setCelular(fieldFormatTelCel.getText());
 			c.setCep(fieldFormatCep.getText());
 			c.setCidade(fieldCidade.getText());
-			c.setCnpj(fieldFormatCnpj.getText());
+			c.setCnpj("111111111");
 			c.setComp(fieldComplemento.getText());
-			c.setCpf(fieldFormatCpf.getText());
+			c.setCpf("11111111111");
 			c.setDataNasc(fieldFormatDataNasc.getText());
 			c.setLogradouro(fieldLogradouro.getText());
 			c.setMontante(fieldMontante.getText());
@@ -549,8 +578,7 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 			
 			c.incrementaID();
 			vetor.add(c.getID(), c);;
-			
-			System.out.println(vetor.contains(0));
+			limparTela();
 			
 		}
 		
