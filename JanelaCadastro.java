@@ -337,6 +337,15 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 
 		fieldNum = new JTextField();
 		fieldNum.setBounds(404, 191, 52, 20);
+		fieldNum.addKeyListener(new KeyAdapter() {
+			//@Override
+			public void keyTyped(KeyEvent ev) {
+				String caracteres = "0987654321!@#$%¨&*()_-=+§-,.;<][{}?/|";
+				if (!caracteres.contains(ev.getKeyChar() + "")) {
+					ev.consume();
+				}
+			}
+		});
 		content.add(fieldNum);
 
 		fieldComplemento = new JTextField();		
