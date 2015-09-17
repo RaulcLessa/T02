@@ -24,10 +24,12 @@ public class Cliente {
 	private String tipoEmail;
 	private String UF, Referencia, InfoAdicionais;
 	private float Montante;
-	private int ID, dia, mes, ano;
+	private int dia, mes, ano;
 	private String comp;
 	private String bairro;
 	private String cpf;
+	private int ID;
+	private static int contID = 0;
 
 	public Cliente() {
 	}
@@ -57,6 +59,13 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
+	//Incrementa ID - Raul
+	
+	public void incrementaID(){
+		this.ID = contID;
+		contID++;
+	}
+	
 	// Métodos GUILHERME
 	public boolean setCelular(String celular) {
 		valido = false;

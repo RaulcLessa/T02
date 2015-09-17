@@ -3,6 +3,7 @@ package T02;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.ParseException;
+import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
@@ -11,9 +12,8 @@ import javax.swing.text.MaskFormatter;
 @SuppressWarnings("serial")
 public class JanelaCadastro extends JFrame implements ActionListener {
 	
-	Cliente c = new Cliente();
-	
 	//Labels
+	protected Vector<Cliente> vetor = new Vector<Cliente>();
 	private JLabel lblSexo;
 	private JLabel lblEstadoCivil;
 	private JLabel lblDataDeNascimento;
@@ -88,9 +88,14 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 	private MaskFormatter maskTelCel;
 	private MaskFormatter maskCpf;
 	private MaskFormatter maskCnpj;
+	
+	//Objeto
+	protected Cliente c;
 
 	public JanelaCadastro() throws ParseException {
 		super("Cadastrar usuário");
+
+		c = new Cliente();
 
 		Container content = getContentPane();
 		content.setLayout(null);
@@ -488,15 +493,13 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 			//Seta Informações Adicionais
 			c.setInfoAdicionais(textAreaInfoAd.getText(), 300);
 			
-			//Seta Pessoa Física ou Jurídica
+			//Seta elementos das Radio buttons Pessoa Física e Sexo
 			if(rdbtnFisica.isSelected()){
 				c.setTipoPessoa("Física");
 			}
 			else if(rdbtnJridi.isSelected()){
 				c.setTipoPessoa("Jurídica");
 			}
-			
-			//Seta Sexo Masuclino ou Feminino
 			if(rdbtnMasculino.isSelected()){
 				c.setSexo("Masculino");
 			}
@@ -504,15 +507,15 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 				c.setSexo("Feminino");
 			}
 			
-			//Seta Estado Civil
+			//Seta elementos das ComboBoxes, Faixa Salarial, UF e Estado Civil
+			c.setUF((String) comboBoxUf.getSelectedItem());
+			c.setSalario((String) comboBoxFxSal.getSelectedItem());
 			c.setEstadoCivil((String) boxEstadoCivil.getSelectedItem());
 			
-			//Seta UF
-			c.setUF((String) comboBoxUf.getSelectedItem());
-			
-			//Seta Faixa Salarial
-			c.setSalario((String) comboBoxFxSal.getSelectedItem());
-			
+			/*Seta elementos de TextFielnd
+			 * Nome, Bairro, Celular, Cep, Cidade, Cnpj, Comp, Cpf, Data de Nascimento, Logradouro, Montante, Número,
+			 * Profissão, Referência, RG, Telefone Fixo, Celular, Time de Futebol e Email.
+			 */
 			c.setNome(fieldNome.getText());
 			c.setBairro(fieldBairro.getText());
 			c.setCelular(fieldFormatTelCel.getText());
@@ -531,6 +534,23 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 			c.setTelFixo(fieldFormatTelRes.getText());
 			c.setTimeFutebol(fieldTime.getText());
 			c.setTipoEmail(fieldEmail.getText());
+			
+			/*
+			 * Adiciona o objeto c ao vetor na posição do ID. 
+			 * No caso, tive que mudar a lógica do ID na classe Cliente. O que eu fiz foi o seguinte;
+			 * Atribui um valor estático à uma variável auxiliar chamada "contID" inicializada em 0 e criei um método chamado "incrementaID"
+			 * O método "incrementaID" adiciona o valor do contID(que incialmente é zero) e então incrementa +1 à variável cont ID,
+			 * que na próxima vez que for chamado, terá o valor 1 e assim por diante.
+			 * Esse valor será o ID do usuário e eu usei esse valor pra indicar a posição do índice no vetor.
+			 * vector.add(índice, objeto)
+			 * que no caso, seria vector.add(ID do Cliente, objeto do cliente); 
+			 * 
+			 */
+			
+			c.incrementaID();
+			vetor.add(c.getID(), c);;
+			
+			System.out.println(vetor.contains(0));
 			
 		}
 		
