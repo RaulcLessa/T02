@@ -3,6 +3,7 @@ package T02;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.ParseException;
+import java.util.Enumeration;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
@@ -207,31 +208,6 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		//Button Groups
 		ButtonGroup groupPessoa = new ButtonGroup();
 		ButtonGroup sexo = new ButtonGroup();
-		
-		//Radio Buttons
-		rdbtnFisica = new JRadioButton("Fisica");
-		rdbtnFisica.setBounds(143, 386, 71, 20);
-		groupPessoa.add(rdbtnFisica);
-		content.add(rdbtnFisica);
-		
-		rdbtnJridi = new JRadioButton("Jurídica");
-		rdbtnJridi.setBounds(216, 386, 104, 20);
-		groupPessoa.add(rdbtnJridi);
-		content.add(rdbtnJridi);
-		
-		rdbtnMasculino = new JRadioButton("Masculino");
-		rdbtnMasculino.setBounds(137, 47, 99, 14);
-		content.add(rdbtnMasculino);
-		rdbtnMasculino.setActionCommand("Masculino");
-		rdbtnMasculino.addActionListener(this);
-		sexo.add(rdbtnMasculino);
-		
-		rdbtnFeminino = new JRadioButton("Feminino");
-		rdbtnFeminino.setBounds(238, 44, 99, 20);
-		content.add(rdbtnFeminino);
-		rdbtnFeminino.setActionCommand("Feminino");
-		rdbtnFeminino.addActionListener(this);
-		sexo.add(rdbtnFeminino);
 
 		//Combo Boxes
 		comboBoxFxSal = new JComboBox<String>();
@@ -445,7 +421,7 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		maskCnpj = new MaskFormatter("##.###.###/####");
 		maskCnpj.setPlaceholderCharacter('_');
 		fieldFormatCnpj = new JFormattedTextField(maskCnpj);
-		fieldFormatCnpj.setBounds(143, 445, 200, 20);
+		fieldFormatCnpj.setBounds(143, 417, 200, 20);
 		fieldFormatCnpj.setToolTipText("Digite apenas números.");
 		content.add(fieldFormatCnpj);
 		fieldFormatCnpj.setVisible(false);
@@ -461,6 +437,35 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		fieldMontante = new JTextField();
 		fieldMontante.setBounds(143, 533, 104, 20);
 		content.add(fieldMontante);
+		
+		//Radio Buttons
+		rdbtnFisica = new JRadioButton("Física");
+		rdbtnFisica.setBounds(143, 386, 71, 20);
+		groupPessoa.add(rdbtnFisica);
+		rdbtnFisica.setActionCommand("Física");
+		rdbtnFisica.addActionListener(this);
+		content.add(rdbtnFisica);
+		
+		rdbtnJridi = new JRadioButton("Jurídica");
+		rdbtnJridi.setBounds(216, 386, 104, 20);
+		groupPessoa.add(rdbtnJridi);
+		rdbtnJridi.setActionCommand("Jurídica");
+		rdbtnJridi.addActionListener(this);
+		content.add(rdbtnJridi);
+		
+		rdbtnMasculino = new JRadioButton("Masculino");
+		rdbtnMasculino.setBounds(137, 47, 99, 14);
+		content.add(rdbtnMasculino);
+		rdbtnMasculino.setActionCommand("Masculino");
+		rdbtnMasculino.addActionListener(this);
+		sexo.add(rdbtnMasculino);
+		
+		rdbtnFeminino = new JRadioButton("Feminino");
+		rdbtnFeminino.setBounds(238, 44, 99, 20);
+		content.add(rdbtnFeminino);
+		rdbtnFeminino.setActionCommand("Feminino");
+		rdbtnFeminino.addActionListener(this);
+		sexo.add(rdbtnFeminino);
 
 		//Buttons
 		btnSalvar = new JButton("Salvar");
@@ -514,11 +519,26 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		new JanelaCadastro();
 
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		
 		String comand = (String) e.getActionCommand();
+		
+		if(comand.equals("Física")){
+			lblCpf.setVisible(true);
+			fieldFormatCpf.setVisible(true);
+			lblCnpj.setVisible(false);
+			fieldFormatCnpj.setVisible(false);
+		}
+		if(comand.equals("Jurídica")){
+			lblCpf.setVisible(false);
+			fieldFormatCpf.setVisible(false);
+			lblCnpj.setVisible(true);
+			fieldFormatCnpj.setVisible(true);
+		}
+		
 		if(comand.equals("Salvar")){
 			
 			c = new Cliente();
@@ -585,8 +605,6 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 			Cliente.setVectorC(c.getID(), c);
 			System.out.println("Posição atual " + Cliente.getVectorC().get(c.getID()).getNome() + " " +c.getID());
 			System.out.println("Posição " + Cliente.getVectorC().get(0).getNome() + " 0");
-			
-			
 		}
 		
 		if(comand.equals("Sair")){
