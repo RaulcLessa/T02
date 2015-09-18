@@ -3,7 +3,6 @@ package T02;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.ParseException;
-import java.util.Enumeration;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
@@ -192,7 +191,7 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		lblCnpj.setVisible(false);
 
 		lblMontante = new JLabel("Montante:");
-		lblMontante.setBounds(10, 542, 99, 14);
+		lblMontante.setBounds(10, 513, 99, 14);
 		content.add(lblMontante);
 
 		lblInformaesAdicionais = new JLabel("Informações adicionais:");
@@ -399,7 +398,7 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		maskTelCel.setPlaceholderCharacter('_');
 		fieldFormatTelCel = new JFormattedTextField(maskTelCel);
 		fieldFormatTelCel.setBounds(353, 328, 99, 20);
-		fieldFormatTelCel.setToolTipText("Digite apenas letras.");
+		fieldFormatTelCel.setToolTipText("Digite apenas números.");
 		content.add(fieldFormatTelCel);
 
 		fieldEmail = new JTextField();
@@ -435,7 +434,7 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		fieldFormatCpf.setVisible(false);
 		
 		fieldMontante = new JTextField();
-		fieldMontante.setBounds(143, 533, 104, 20);
+		fieldMontante.setBounds(143, 510, 104, 20);
 		content.add(fieldMontante);
 		
 		//Radio Buttons
@@ -469,18 +468,18 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 
 		//Buttons
 		btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(284, 620, 89, 23);
+		btnSalvar.setBounds(280, 581, 89, 23);
 		content.add(btnSalvar);
 		btnSalvar.setActionCommand("Salvar");
 		btnSalvar.addActionListener(this);
 
 		btnSair = new JButton("Sair");
-		btnSair.setBounds(376, 620, 89, 23);
+		btnSair.setBounds(377, 581, 89, 23);
 		btnSair.setActionCommand("Sair");
 		btnSair.addActionListener(this);
 		content.add(btnSair);
 
-		setSize(800, 720);
+		setSize(700, 680);
 		setVisible(true);
 
 	}
@@ -515,6 +514,40 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		rdbtnJridi.setSelected(false);
 	}
 
+	private boolean verificaDados(){
+		
+		boolean aux;
+		
+		if((fieldNome.getText() == null) || ((!rdbtnFeminino.isSelected())&&(!rdbtnMasculino.isSelected())) ||
+				(fieldFormatRg.getText() == null) || (fieldProf.getText() == null) || (fieldLogradouro.getText() == null) ||
+				(fieldNum.getText() == null) || (fieldCidade.getText() == null) || ((!rdbtnFisica.isSelected())&&(!rdbtnJridi.isSelected()))
+				|| (!c.setDataNasc(fieldFormatDataNasc.getText())) || (!c.setCpf(fieldFormatCpf.getText()))
+				||(!c.setCnpj(fieldFormatCnpj.getText()))){
+			aux = false;
+		}
+		else if(rdbtnFisica.isSelected()){
+			if(fieldFormatCpf.getText() == null){
+				aux = false;
+			}
+			else{
+				aux = true;
+			}
+		}
+		else if(rdbtnJridi.isSelected()){
+			if(fieldFormatCnpj.getText() == null){
+				aux = false;
+			}
+			else{
+				aux = true;
+			}
+		}
+		else{
+			aux = false;
+		}
+		return aux;
+		
+	}
+	
 	public static void main(String[] args) throws ParseException {
 		new JanelaCadastro();
 
@@ -543,68 +576,80 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 			
 			c = new Cliente();
 			
-			//Seta Informações Adicionais
-			c.setInfoAdicionais(textAreaInfoAd.getText(), 300);
+			if(verificaDados()){
 			
-			//Seta elementos das Radio buttons Pessoa Física e Sexo
-			if(rdbtnFisica.isSelected()){
-				c.setTipoPessoa("Física");
+				//Seta Informações Adicionais
+				c.setInfoAdicionais(textAreaInfoAd.getText(), 300);
+				
+				//Seta elementos das Radio buttons Pessoa Física e Sexo
+				if(rdbtnFisica.isSelected()){
+					c.setTipoPessoa("Física");
+				}
+				else if(rdbtnJridi.isSelected()){
+					c.setTipoPessoa("Jurídica");
+				}
+				if(rdbtnMasculino.isSelected()){
+					c.setSexo("Masculino");
+				}
+				else if(rdbtnFeminino.isSelected()){
+					c.setSexo("Feminino");
+				}
+				
+				//Seta elementos das ComboBoxes, Faixa Salarial, UF e Estado Civil
+				c.setUF((String) comboBoxUf.getSelectedItem());
+				c.setSalario((String) comboBoxFxSal.getSelectedItem());
+				c.setEstadoCivil((String) boxEstadoCivil.getSelectedItem());
+				
+				/*Seta elementos de TextFielnd
+				 * Nome, Bairro, Celular, Cep, Cidade, Cnpj, Comp, Cpf, Data de Nascimento, Logradouro, Montante, Número,
+				 * Profissão, Referência, RG, Telefone Fixo, Celular, Time de Futebol e Email.
+				 */
+				c.setNome(fieldNome.getText());
+				c.setBairro(fieldBairro.getText());
+				c.setCelular(fieldFormatTelCel.getText());
+				c.setCep(fieldFormatCep.getText());
+				c.setCidade(fieldCidade.getText());
+				c.setCnpj("111111111");
+				c.setComp(fieldComplemento.getText());
+				c.setCpf("11111111111");
+				c.setDataNasc(fieldFormatDataNasc.getText());
+				c.setLogradouro(fieldLogradouro.getText());
+				c.setMontante(fieldMontante.getText());
+				c.setNumero(fieldNum.getText());
+				c.setProfissao(fieldProf.getText());
+				c.setReferencia(fieldRef.getText(), 300);
+				c.setRG(fieldFormatRg.getText());
+				c.setTelFixo(fieldFormatTelRes.getText());
+				c.setTimeFutebol(fieldTime.getText());
+				c.setTipoEmail(fieldEmail.getText());
+				
+				/*
+				 * Adiciona o objeto c ao vetor na posição do ID. 
+				 * No caso, tive que mudar a lógica do ID na classe Cliente. O que eu fiz foi o seguinte;
+				 * Atribui um valor estático à uma variável auxiliar chamada "contID" inicializada em 0 e criei um método chamado "incrementaID"
+				 * O método "incrementaID" adiciona o valor do contID(que incialmente é zero) e então incrementa +1 à variável cont ID,
+				 * que na próxima vez que for chamado, terá o valor 1 e assim por diante.
+				 * Esse valor será o ID do usuário e eu usei esse valor pra indicar a posição do índice no vetor.
+				 * vector.add(índice, objeto)
+				 * que no caso, seria vector.add(ID do Cliente, objeto do cliente); 
+				 * 
+				 */
+				
+				c.incrementaID();
+				limparTela();
+				Cliente.setVectorC(c.getID(), c);
+				System.out.println("Posição atual " + Cliente.getVectorC().get(c.getID()).getNome() + " " +c.getID());
+				System.out.println("Data " + Cliente.getVectorC().get(c.getID()).getData());
+				System.out.println("Cpf " + Cliente.getVectorC().get(c.getID()).getCPF());
+				
+				
+				System.out.println("Posição " + Cliente.getVectorC().get(0).getNome() + " 0");
 			}
-			else if(rdbtnJridi.isSelected()){
-				c.setTipoPessoa("Jurídica");
+			
+			if(!verificaDados()){
+				JOptionPane.showMessageDialog(boxEstadoCivil, "Um ou mais campos obrigatórios não foram preenchidos.");
 			}
-			if(rdbtnMasculino.isSelected()){
-				c.setSexo("Masculino");
-			}
-			else if(rdbtnFeminino.isSelected()){
-				c.setSexo("Feminino");
-			}
-			
-			//Seta elementos das ComboBoxes, Faixa Salarial, UF e Estado Civil
-			c.setUF((String) comboBoxUf.getSelectedItem());
-			c.setSalario((String) comboBoxFxSal.getSelectedItem());
-			c.setEstadoCivil((String) boxEstadoCivil.getSelectedItem());
-			
-			/*Seta elementos de TextFielnd
-			 * Nome, Bairro, Celular, Cep, Cidade, Cnpj, Comp, Cpf, Data de Nascimento, Logradouro, Montante, Número,
-			 * Profissão, Referência, RG, Telefone Fixo, Celular, Time de Futebol e Email.
-			 */
-			c.setNome(fieldNome.getText());
-			c.setBairro(fieldBairro.getText());
-			c.setCelular(fieldFormatTelCel.getText());
-			c.setCep(fieldFormatCep.getText());
-			c.setCidade(fieldCidade.getText());
-			c.setCnpj("111111111");
-			c.setComp(fieldComplemento.getText());
-			c.setCpf("11111111111");
-			c.setDataNasc(fieldFormatDataNasc.getText());
-			c.setLogradouro(fieldLogradouro.getText());
-			c.setMontante(fieldMontante.getText());
-			c.setNumero(fieldNum.getText());
-			c.setProfissao(fieldProf.getText());
-			c.setReferencia(fieldRef.getText(), 300);
-			c.setRG(fieldFormatRg.getText());
-			c.setTelFixo(fieldFormatTelRes.getText());
-			c.setTimeFutebol(fieldTime.getText());
-			c.setTipoEmail(fieldEmail.getText());
-			
-			/*
-			 * Adiciona o objeto c ao vetor na posição do ID. 
-			 * No caso, tive que mudar a lógica do ID na classe Cliente. O que eu fiz foi o seguinte;
-			 * Atribui um valor estático à uma variável auxiliar chamada "contID" inicializada em 0 e criei um método chamado "incrementaID"
-			 * O método "incrementaID" adiciona o valor do contID(que incialmente é zero) e então incrementa +1 à variável cont ID,
-			 * que na próxima vez que for chamado, terá o valor 1 e assim por diante.
-			 * Esse valor será o ID do usuário e eu usei esse valor pra indicar a posição do índice no vetor.
-			 * vector.add(índice, objeto)
-			 * que no caso, seria vector.add(ID do Cliente, objeto do cliente); 
-			 * 
-			 */
-			
-			c.incrementaID();
-			limparTela();
-			Cliente.setVectorC(c.getID(), c);
-			System.out.println("Posição atual " + Cliente.getVectorC().get(c.getID()).getNome() + " " +c.getID());
-			System.out.println("Posição " + Cliente.getVectorC().get(0).getNome() + " 0");
+						
 		}
 		
 		if(comand.equals("Sair")){

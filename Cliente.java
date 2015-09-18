@@ -32,30 +32,7 @@ public class Cliente {
 	private static int contID = 0;
 	private static Vector<Cliente> vector = new Vector<Cliente>();
 
-	public Cliente() {
-	}
-
-	public Cliente(String salario, String logradouro, String numero,
-			String tipoPessoa, String CPF, String CNPJ, String celular,
-			String telFixo, String timeFutebol, String estadoCivil,
-			String cidade, String cep, String data, String cnpj, String UF,
-			String Referencia, int ID) {
-		this.setSalario(salario);
-		this.setLogradouro(logradouro);
-		this.setNumero(numero);
-		this.setTipoPessoa(tipoPessoa);
-		this.setCelular(celular);
-		this.setTelFixo(telFixo);
-		this.setTimeFutebol(timeFutebol);
-		this.setEstadoCivil(estadoCivil);
-		this.setCidade(cidade);
-		this.setCep(cep);
-		this.setDataNasc(data);
-		this.setCnpj(cnpj);
-		this.UF = UF;
-		this.Referencia = Referencia;
-		this.ID = ID;
-	}
+	public Cliente() {}
 	
 	public static void setVectorC(int indice, Object obj){
 		vector.add(indice, (Cliente) obj);
@@ -311,16 +288,18 @@ public class Cliente {
 
 	public boolean setDataNasc(String data) {
 
-		if (data == null || data.equals(""))
-			return false;
+		Date d = new Date();
+	//	if (data == null || data.equals(""))
+	//		return false;
 
 		try {
 			DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			formatter.setLenient(false); // se tolerancia se a data for inválida
 			// retorna erro ex:31/02/2009
 
+			String aux = formatter.format(d).toString();
 			java.util.Date dataMinima = formatter.parse("01/01/1900");
-			java.util.Date dataMaxima = formatter.parse("31/12/2005");
+			java.util.Date dataMaxima = formatter.parse(aux);
 			java.util.Date dataParam = formatter.parse(data);
 
 			// comparando período válido
