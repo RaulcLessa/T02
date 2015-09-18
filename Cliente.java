@@ -30,6 +30,7 @@ public class Cliente {
 	private String cpf;
 	private int ID;
 	private static int contID = 0;
+	private static Vector<Cliente> vector = new Vector<Cliente>();
 
 	public Cliente() {
 	}
@@ -54,9 +55,14 @@ public class Cliente {
 		this.UF = UF;
 		this.Referencia = Referencia;
 		this.ID = ID;
-		this.comp = comp;
-		this.bairro = bairro;
-		this.cpf = cpf;
+	}
+	
+	public static void setVectorC(int indice, Object obj){
+		vector.add(indice, (Cliente) obj);
+	}
+	
+	public static Vector<Cliente> getVectorC(){
+		return vector;
 	}
 
 	//Incrementa ID - Raul
@@ -64,6 +70,10 @@ public class Cliente {
 	public void incrementaID(){
 		this.ID = contID;
 		contID++;
+	}
+	
+	public int getID() {
+		return this.ID;
 	}
 	
 	// Métodos GUILHERME
@@ -582,10 +592,6 @@ public class Cliente {
 
 	public String getReferencia() {
 		return this.Referencia;
-	}
-
-	public int getID() {
-		return this.ID;
 	}
 
 	public String getDataCad() {

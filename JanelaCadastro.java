@@ -3,17 +3,15 @@ package T02;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.ParseException;
-import java.util.Vector;
 
 import javax.swing.*;
-import javax.swing.text.AbstractDocument;
 import javax.swing.text.MaskFormatter;
 
 @SuppressWarnings("serial")
 public class JanelaCadastro extends JFrame implements ActionListener {
 	
+	
 	//Labels
-	protected Vector<Cliente> vetor = new Vector<Cliente>();
 	private JLabel lblSexo;
 	private JLabel lblEstadoCivil;
 	private JLabel lblDataDeNascimento;
@@ -95,8 +93,6 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 
 	public JanelaCadastro() throws ParseException {
 		super("Cadastrar usuário");
-
-		c = new Cliente();
 
 		content = getContentPane();
 		content.setLayout(null);
@@ -203,11 +199,9 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		content.add(lblInformaesAdicionais);
 		
 		//Text Area
-		int maxChars = 300;
 		textAreaInfoAd = new JTextArea();
-		AbstractDocument pDoc = (AbstractDocument)textAreaInfoAd.getDocument();
-		pDoc.setDocumentFilter(new DocumentSizeFilter(maxChars));
 		textAreaInfoAd.setBounds(392, 470, 254, 86);
+		textAreaInfoAd.setToolTipText("Digite apenas números.");
 		content.add(textAreaInfoAd);
 		
 		//Button Groups
@@ -445,7 +439,7 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 				}
 			}
 		});
-		fieldEmail.setToolTipText("Digite apenas letras.");
+		fieldEmail.setToolTipText("Informe um endereço de Email válido");
 		content.add(fieldEmail);
 		
 		maskCnpj = new MaskFormatter("##.###.###/####");
@@ -515,7 +509,6 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		rdbtnFisica.setSelected(false);
 		rdbtnJridi.setSelected(false);
 	}
-	
 
 	public static void main(String[] args) throws ParseException {
 		new JanelaCadastro();
@@ -527,6 +520,8 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		
 		String comand = (String) e.getActionCommand();
 		if(comand.equals("Salvar")){
+			
+			c = new Cliente();
 			
 			//Seta Informações Adicionais
 			c.setInfoAdicionais(textAreaInfoAd.getText(), 300);
@@ -586,15 +581,17 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 			 */
 			
 			c.incrementaID();
-			vetor.add(c.getID(), c);;
 			limparTela();
+			Cliente.setVectorC(c.getID(), c);
+			System.out.println("Posição atual " + Cliente.getVectorC().get(c.getID()).getNome() + " " +c.getID());
+			System.out.println("Posição " + Cliente.getVectorC().get(0).getNome() + " 0");
+			
 			
 		}
 		
 		if(comand.equals("Sair")){
 			System.exit(0);
 		}
-		
 	}
 }
 
