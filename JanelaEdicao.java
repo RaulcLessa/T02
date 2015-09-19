@@ -481,8 +481,8 @@ public class JanelaEdicao extends JFrame implements ActionListener {
 
 		int valor = JanelaBusca.getValorBusca();
 
-		for (int i = 0; i < JanelaCadastro.vetor.size(); i++) {
-			Cliente obj = JanelaCadastro.vetor.elementAt(i);
+		for (int i = 0; i < Cliente.getVectorC().size(); i++) {
+			Cliente obj = Cliente.getVectorC().elementAt(i);
 			if (valor == i) {
 
 				// Chama os valores dentro dos JTextFields

@@ -145,7 +145,7 @@ public class Cliente {
 		return dataNasc;
 	}
 
-	public boolean setData(String dataNasc) {
+	public boolean setDataNasc(String dataNasc) {
 		
 		Date d = new Date();
 		//	if (data == null || data.equals(""))
