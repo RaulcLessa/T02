@@ -8,13 +8,10 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 
-
-
 @SuppressWarnings("serial")
-public class JanelaCadastro extends JFrame implements ActionListener {
+public class JanelaEdicao extends JFrame implements ActionListener {
 
-	
-	public static Vector<Cliente> vetor = new Vector<Cliente>();
+	// Labels
 	private JLabel lblSexo;
 	private JLabel lblEstadoCivil;
 	private JLabel lblDataDeNascimento;
@@ -52,16 +49,20 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 	private JTextField fieldCidade;
 	private JTextField fieldRef;
 	private JTextField fieldEmail;
+	private JTextField fieldCnpj;
+	private JTextField fieldCpf;
 	private JTextField fieldMontante;
 
-	// TextPArea
-	private JTextArea textAreaInfoAd;
+	// TextPane
+	private JTextPane textPaneInfoAd;
 
 	// Radioutton
 	private JRadioButton rdbtnMasculino;
 	private JRadioButton rdbtnFeminino;
 	private JRadioButton rdbtnFisica;
 	private JRadioButton rdbtnJridi;
+
+	private JTextArea textAreaInfoAd;
 
 	// ComboBoxes
 	private JComboBox<String> boxEstadoCivil;
@@ -78,8 +79,6 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 	private JFormattedTextField fieldFormatDataNasc;
 	private JFormattedTextField fieldFormatRg;
 	private JFormattedTextField fieldFormatCep;
-	private JFormattedTextField fieldFormatCpf;
-	private JFormattedTextField fieldFormatCnpj;
 
 	// Máscaras
 	private MaskFormatter maskTelRes;
@@ -87,14 +86,9 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 	private MaskFormatter maskRg;
 	private MaskFormatter maskCep;
 	private MaskFormatter maskTelCel;
-	private MaskFormatter maskCpf;
-	private MaskFormatter maskCnpj;
 
-	// Objeto
-	// protected Cliente c;
-
-	public JanelaCadastro() throws ParseException {
-		super("Cadastrar usuário");
+	public JanelaEdicao(Vector<?> vetor) throws ParseException {
+		super("Editar cadastro");
 
 		Container content = getContentPane();
 		content.setLayout(null);
@@ -180,16 +174,14 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		lblCpf = new JLabel("CPF*:");
 		lblCpf.setBounds(10, 420, 79, 14);
 		content.add(lblCpf);
-		lblCpf.setVisible(false);
 
 		lblTipoDePessoa = new JLabel("Tipo de pessoa*:");
 		lblTipoDePessoa.setBounds(10, 387, 135, 14);
 		content.add(lblTipoDePessoa);
 
 		lblCnpj = new JLabel("CNPJ*:");
-		lblCnpj.setBounds(10, 420, 79, 14);
+		lblCnpj.setBounds(10, 445, 99, 14);
 		content.add(lblCnpj);
-		lblCnpj.setVisible(false);
 
 		lblMontante = new JLabel("Montante:");
 		lblMontante.setBounds(10, 542, 99, 14);
@@ -199,9 +191,10 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		lblInformaesAdicionais.setBounds(249, 480, 144, 14);
 		content.add(lblInformaesAdicionais);
 
-		textAreaInfoAd = new JTextArea();
-		textAreaInfoAd.setBounds(392, 470, 254, 86);
-		content.add(textAreaInfoAd);
+		// Text Pane
+		textPaneInfoAd = new JTextPane();
+		textPaneInfoAd.setBounds(392, 470, 254, 86);
+		content.add(textPaneInfoAd);
 
 		// Button Groups
 		ButtonGroup groupPessoa = new ButtonGroup();
@@ -439,21 +432,35 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		fieldEmail.setToolTipText("Digite apenas letras.");
 		content.add(fieldEmail);
 
-		maskCnpj = new MaskFormatter("##.###.###/####-##");
-		maskCnpj.setPlaceholderCharacter('_');
-		fieldFormatCnpj = new JFormattedTextField(maskCnpj);
-		fieldFormatCnpj.setBounds(143, 445, 200, 20);
-		fieldFormatCnpj.setToolTipText("Digite apenas números.");
-		content.add(fieldFormatCnpj);
-		fieldFormatCnpj.setVisible(false);
+		fieldCnpj = new JTextField();
+		fieldCnpj.setBounds(143, 445, 200, 20);
+		fieldCnpj.addKeyListener(new KeyAdapter() {
+			// @Override
+			public void keyTyped(KeyEvent ev) {
+				String caracteres = "0987654321!@#$%¨&*()_-=+§-,.;<][{}?/|";
+				if (!caracteres.contains(ev.getKeyChar() + "")) {
+					JOptionPane.showMessageDialog(fieldCep,
+							"Digite apenas letras!");
+					ev.consume();
+				}
+			}
+		});
 
-		maskCpf = new MaskFormatter("###.###.###-##");
-		maskCpf.setPlaceholderCharacter('_');
-		fieldFormatCpf = new JFormattedTextField(maskCpf);
-		fieldFormatCpf.setBounds(143, 417, 200, 20);
-		fieldFormatCpf.setToolTipText("Digite apenas números.");
-		content.add(fieldFormatCpf);
-		fieldFormatCpf.setVisible(false);
+		fieldCpf = new JTextField();
+		fieldCpf.setBounds(143, 417, 200, 20);
+		fieldCpf.addKeyListener(new KeyAdapter() {
+			// @Override
+			public void keyTyped(KeyEvent ev) {
+				String caracteres = "0987654321!@#$%¨&*()_-=+§-,.;<][{}?/|";
+				if (!caracteres.contains(ev.getKeyChar() + "")) {
+					JOptionPane.showMessageDialog(fieldCep,
+							"Digite apenas letras!");
+					ev.consume();
+				}
+			}
+		});
+		fieldCpf.setToolTipText("Digite apenas letras.");
+		content.add(fieldCpf);
 
 		fieldMontante = new JTextField();
 		fieldMontante.setBounds(143, 533, 104, 20);
@@ -471,7 +478,56 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		btnSair.setActionCommand("Sair");
 		btnSair.addActionListener(this);
 		content.add(btnSair);
-		
+
+		int valor = JanelaBusca.getValorBusca();
+
+		for (int i = 0; i < JanelaCadastro.vetor.size(); i++) {
+			Cliente obj = JanelaCadastro.vetor.elementAt(i);
+			if (valor == i) {
+
+				// Chama os valores dentro dos JTextFields
+				fieldNome.setText(obj.getNome());
+				fieldBairro.setText(obj.getBairro());
+				fieldFormatTelCel.setText(obj.getCelular());
+				fieldFormatCep.setText(obj.getCep());
+				fieldCidade.setText(obj.getCidade());
+				// fieldCnpj.setText(obj.getCnpj());
+				fieldComplemento.setText(obj.getComp());
+				// fieldCpf.setText(obj.getCpf());
+				fieldFormatDataNasc.setText(obj.getDataNasc());
+				fieldLogradouro.setText(obj.getLogradouro());
+				fieldMontante.setText(obj.getMontante());
+				fieldNum.setText(obj.getNumero());
+				fieldProf.setText(obj.getProfissao());
+				fieldRef.setText(obj.getReferencia());
+				fieldFormatRg.setText(obj.getRG());
+				fieldFormatTelRes.setText(obj.getTelFixo());
+				fieldTime.setText(obj.getTimeFutebol());
+				fieldEmail.setText(obj.getTipoEmail());
+
+				// Chama os valores do JTextArea
+				textAreaInfoAd.setText(obj.getInfoAdicionais());
+
+				// Chama os valores dos JComboBoxes
+				comboBoxUf.setSelectedItem(obj.getUF());
+				comboBoxFxSal.setSelectedItem(obj.getSalario());
+				boxEstadoCivil.setSelectedItem(obj.getEstadoCivil());
+
+				// Seta os JRadioButtons
+				if (obj.getSexo() == "Masculino") {
+					rdbtnMasculino.setSelected(true);
+				} else {
+					rdbtnFeminino.setSelected(true);
+				}
+				if (obj.getTipoPessoa() == "Física") {
+					rdbtnFisica.setSelected(true);
+				} else {
+					rdbtnJridi.setSelected(true);
+				}
+
+			}
+
+		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 720);
 		setVisible(true);
@@ -479,107 +535,15 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) throws ParseException {
-		new JanelaCadastro();
+		// new JanelaEdicao();
 
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		String comando = (String) e.getActionCommand();
 
-		String comand = (String) e.getActionCommand();
-		if (comand.equals("Salvar")) {
-			
-			Cliente c = new Cliente();
+		if (comando.equals("Salvar")) {
 
-			// Seta Informações Adicionais
-			c.setInfoAdicionais(textAreaInfoAd.getText());
-
-			// Seta elementos das Radio buttons Pessoa Física e Sexo
-			if (rdbtnFisica.isSelected()) {
-				c.setTipoPessoa("Física");
-			} else if (rdbtnJridi.isSelected()) {
-				c.setTipoPessoa("Jurídica");
-			}
-			if (rdbtnMasculino.isSelected()) {
-				c.setSexo("Masculino");
-			} else if (rdbtnFeminino.isSelected()) {
-				c.setSexo("Feminino");
-			}
-
-			// Seta elementos das ComboBoxes, Faixa Salarial, UF e Estado Civil
-			c.setUF((String) comboBoxUf.getSelectedItem());
-			c.setSalario((String) comboBoxFxSal.getSelectedItem());
-			c.setEstadoCivil((String) boxEstadoCivil.getSelectedItem());
-
-			/*
-			 * Seta elementos de TextFielnd Nome, Bairro, Celular, Cep, Cidade,
-			 * Cnpj, Comp, Cpf, Data de Nascimento, Logradouro, Montante,
-			 * Número, Profissão, Referência, RG, Telefone Fixo, Celular, Time
-			 * de Futebol e Email.
-			 */
-			c.setNome(fieldNome.getText());
-			c.setBairro(fieldBairro.getText());
-			c.setCelular(fieldFormatTelCel.getText());
-			c.setCep(fieldFormatCep.getText());
-			c.setCidade(fieldCidade.getText());
-			c.setCnpj(fieldFormatCnpj.getText());
-			c.setComp(fieldComplemento.getText());
-			c.setCpf(fieldFormatCpf.getText());
-			c.setData(fieldFormatDataNasc.getText());
-			c.setLogradouro(fieldLogradouro.getText());
-			c.setMontante(fieldMontante.getText());
-			c.setNumero(fieldNum.getText());
-			c.setProfissao(fieldProf.getText());
-			c.setReferencia(fieldRef.getText());
-			c.setRG(fieldFormatRg.getText());
-			c.setTelFixo(fieldFormatTelRes.getText());
-			c.setTimeFutebol(fieldTime.getText());
-			c.setTipoEmail(fieldEmail.getText());
-			
-			c.incrementaID();
-			vetor.add(c.getID(), c);
-			//vetor.addElement(c);
-			
-			//Apaga os dados dos JTextFields quando clicar no botão salvar
-			fieldNome.setText("");
-			fieldBairro.setText("");
-			fieldFormatTelCel.setText("");
-			fieldFormatCep.setText("");
-			fieldCidade.setText("");
-			fieldFormatCnpj.setText("");
-			fieldComplemento.setText("");
-			fieldFormatCpf.setText("");
-			fieldFormatDataNasc.setText("");
-			fieldLogradouro.setText("");
-			fieldMontante.setText("");
-			fieldNum.setText("");
-			fieldProf.setText("");
-			fieldRef.setText("");
-			fieldFormatRg.setText("");
-			fieldFormatTelRes.setText("");
-			fieldTime.setText("");
-			fieldEmail.setText("");
-			
-			//Seta como nulo os JComboBoxes
-			comboBoxUf.setSelectedItem(null);
-			comboBoxFxSal.setSelectedItem(null);
-			boxEstadoCivil.setSelectedItem(null);
-			
-			//Apaga os dados do JTextArea
-			textAreaInfoAd.setText("");
-			
-			//Exibe mensagem ao usuário
-			JOptionPane.showMessageDialog(comboBoxUf, "Cadastrado com sucesso!");
-		
 		}
-
-		if (comand.equals("Sair")) {
-			try {
-				new JanelaEdicao(vetor);
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-
 	}
 }
