@@ -223,6 +223,8 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		comboBoxUf.setModel(new DefaultComboBoxModel<String>(new String[] {"RS", "SP", "AL", "BA", "SC", "PA", "SE", "AC", "AP", "AM", "CE", "DF", "ES", "GO", "MS", "MT", "MG", "PB", "PR", "PE", "PI", "RJ", "RN", "RO", "RR", "TO"}));
 		comboBoxUf.setBounds(318, 266, 51, 20);
 		content.add(comboBoxUf);
+		comboBoxUf.setActionCommand("SP");
+		comboBoxUf.addActionListener(this);
 		
 		//Fields
 		
@@ -387,14 +389,14 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		fieldRef.setToolTipText("Digite apenas letras.");
 		content.add(fieldRef);
 
-		maskTelRes = new MaskFormatter("(##)#####-####");
+		maskTelRes = new MaskFormatter("(##)####-####");
 		maskTelRes.setPlaceholderCharacter('_');
 		fieldFormatTelRes = new JFormattedTextField(maskTelRes);
 		fieldFormatTelRes.setBounds(143, 328, 150, 20);
 		content.add(fieldFormatTelRes);
 
 		
-		maskTelCel = new MaskFormatter("(##)#####-####");
+		maskTelCel = new MaskFormatter("(##)####-####");
 		maskTelCel.setPlaceholderCharacter('_');
 		fieldFormatTelCel = new JFormattedTextField(maskTelCel);
 		fieldFormatTelCel.setBounds(353, 328, 99, 20);
@@ -554,7 +556,7 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e){
 		
 		
 		String comand = (String) e.getActionCommand();
@@ -572,10 +574,31 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 			fieldFormatCnpj.setVisible(true);
 		}
 		
+		if(Cliente.getVectorC().isEmpty()){
+			JOptionPane.showMessageDialog(boxEstadoCivil, "Não tem nenhum cliente cadastrado");
+		}
+		
+		if(comand.equals("SP")){
+
+			try {
+				if(comboBoxUf.getSelectedItem() == "SP"){
+					maskTelCel = new MaskFormatter("(##)#####-####");
+					maskTelCel.setPlaceholderCharacter('_');
+					fieldFormatTelCel = new JFormattedTextField(maskTelCel);
+				}
+				else{
+					maskTelCel = new MaskFormatter("(##)####-####");
+					maskTelCel.setPlaceholderCharacter('_');
+					fieldFormatTelCel = new JFormattedTextField(maskTelCel);
+				}
+			} catch (ParseException e1) {
+				JOptionPane.showMessageDialog(boxEstadoCivil, "Ocorreu um erro. Tente novamente.");
+			}
+		}
+		
 		if(comand.equals("Salvar")){
 			
 			c = new Cliente();
-			
 			if(verificaDados()){
 			
 				//Seta Informações Adicionais
