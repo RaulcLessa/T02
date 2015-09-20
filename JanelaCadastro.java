@@ -251,6 +251,16 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		fieldFormatDataNasc.setBounds(143, 94, 71, 20);
 		content.add(fieldFormatDataNasc);		
 		fieldFormatDataNasc.setToolTipText("Digite apenas números.");
+		fieldFormatDataNasc.addFocusListener(new FocusAdapter() {  
+		    @Override  
+		    public void focusLost(FocusEvent e) {  
+		        //Se não estiver válido exibe o erro.  
+		    	boolean ok = Cliente.validaDataNasc(fieldFormatDataNasc.getText()); 
+		    	if(!ok){
+					JOptionPane.showMessageDialog(boxEstadoCivil, "Data Inválida");
+				}
+		    }
+		});
 		
 		maskRg = new MaskFormatter("#########");
 		fieldFormatRg = new JFormattedTextField(maskRg);
@@ -547,8 +557,8 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		if((fieldNome.getText() == null) || ((!rdbtnFeminino.isSelected())&&(!rdbtnMasculino.isSelected())) ||
 				(fieldFormatRg.getText() == null) || (fieldProf.getText() == null) || (fieldLogradouro.getText() == null) ||
 				(fieldNum.getText() == null) || (fieldCidade.getText() == null) || ((!rdbtnFisica.isSelected())&&(!rdbtnJridi.isSelected()))
-				|| (!c.setDataNasc(fieldFormatDataNasc.getText())) || (!Cliente.validaCpf(fieldFormatCpf.getText()))
-				||(Cliente.validaCnpj(fieldFormatCnpj.getText()))){
+				|| (!Cliente.validaDataNasc(fieldFormatDataNasc.getText())) || (!Cliente.validaCpf(fieldFormatCpf.getText()))
+				||(!Cliente.validaCnpj(fieldFormatCnpj.getText()))){
 			aux = false;
 		}
 		else if(rdbtnFisica.isSelected()){

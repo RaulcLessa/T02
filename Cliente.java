@@ -27,7 +27,6 @@ public class Cliente {
 	private String tipoEmail;
 	private String UF, Referencia, InfoAdicionais;
 	private String Montante;
-	private int dia, mes, ano;
 	private String comp;
 	private String bairro;
 	private String cpf;
@@ -144,8 +143,12 @@ public class Cliente {
 	public String getDataNasc() {
 		return dataNasc;
 	}
+	
+	public void setDataNasc(String dataNasc){
+		this.dataNasc = dataNasc;
+	}
 
-	public boolean setDataNasc(String dataNasc) {
+	public static boolean validaDataNasc(String dataNasc) {
 		
 		Date d = new Date();
 		//	if (data == null || data.equals(""))
@@ -156,7 +159,7 @@ public class Cliente {
 				formatter.setLenient(false); // se tolerancia se a data for inválida
 				// retorna erro ex:31/02/2009
 
-				String aux = formatter.format(d).toString();
+				String aux = formatter.format(d).trim();
 				java.util.Date dataMinima = formatter.parse("01/01/1900");
 				java.util.Date dataMaxima = formatter.parse(aux);
 				java.util.Date dataParam = formatter.parse(dataNasc);
@@ -165,7 +168,6 @@ public class Cliente {
 				if ((dataParam.before(dataMinima)) || (dataParam.after(dataMaxima))) {
 					return false;
 				} else {
-					this.dataNasc = dataNasc;
 					return true;
 				}
 			} catch (ParseException erro) {
@@ -335,30 +337,6 @@ public class Cliente {
 
 	public void setMontante(String Montante) {
 		this.Montante = Montante;
-	}
-
-	public int getDia() {
-		return dia;
-	}
-
-	public void setDia(int dia) {
-		this.dia = dia;
-	}
-
-	public int getMes() {
-		return mes;
-	}
-
-	public void setMes(int mes) {
-		this.mes = mes;
-	}
-
-	public int getAno() {
-		return ano;
-	}
-
-	public void setAno(int ano) {
-		this.ano = ano;
 	}
 
 	public String getComp() {
