@@ -293,8 +293,8 @@ public class Cliente {
 		this.tipoPessoa = tipoPessoa;
 	}
 
-	public boolean validaEmail(String tipoEmail){
-		boolean vEmail = tipoEmail.matches("\\w+@\\w+\\.\\w+\\.?\\w?");
+	public static boolean validaEmail(String tipoEmail){
+		boolean vEmail = tipoEmail.matches("[\\w\\d]+[\\._\\-\\w\\d]*@\\w+\\.\\w+\\.?\\w*");
 		
 		return vEmail;
 	}

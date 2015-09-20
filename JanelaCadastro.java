@@ -415,18 +415,17 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 
 		fieldEmail = new JTextField();
 		fieldEmail.setBounds(143, 359, 200, 20);
-		fieldEmail.addKeyListener(new KeyAdapter() {
-			//@Override
-			public void keyTyped(KeyEvent ev) {
-				String caracteres = "0987654321!#$%¨&*()_-=+§-,.;<][{}?/|";
-				if (caracteres.contains(ev.getKeyChar() + "")) {
-					JOptionPane.showMessageDialog(fieldCep,
-							"Digite apenas letras!");
-					ev.consume();
+		fieldEmail.addFocusListener(new FocusAdapter() {  
+		    @Override  
+		    public void focusLost(FocusEvent e) {  
+		        //Se não estiver válido exibe o erro.  
+		    	boolean ok = Cliente.validaEmail(fieldEmail.getText()); 
+		    	if(!ok){
+					JOptionPane.showMessageDialog(boxEstadoCivil, "Email inválido");
 				}
-			}
+		    }
 		});
-		fieldEmail.setToolTipText("Informe um endereço de Email válido");
+		fieldEmail.setToolTipText("Digite caracteres entre números, letras ( . _ - ) seguido de um @ domínio");
 		content.add(fieldEmail);
 		
 		maskCnpj = new MaskFormatter("##.###.###/####-##");
