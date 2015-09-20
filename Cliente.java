@@ -110,11 +110,11 @@ public class Cliente {
 	}
 
 	public String getCPF() {
-		return CPF;
+		return this.CPF;
 	}
 
 	public void setCPF(String cPF) {
-		CPF = cPF;
+		this.CPF = cPF;
 	}
 
 	public String getCNPJ() {
@@ -177,7 +177,9 @@ public class Cliente {
 		return cnpj;
 	}
 
-	public boolean setCnpj(String CNPJ) {
+	
+	
+	public static boolean validaCnpj(String CNPJ) {
 		// remove mascara de cnpj
 		CNPJ = CNPJ.replaceAll("\\D", "");
 
@@ -233,7 +235,6 @@ public class Cliente {
 				// dígitos informados.
 
 			if ((dig13 == CNPJ.charAt(12)) && (dig14 == CNPJ.charAt(13))) {
-				this.cnpj = CNPJ;
 				return true;
 
 			} else {
@@ -379,65 +380,72 @@ public class Cliente {
 	public String getCpf() {
 		return cpf;
 	}
-
-	public boolean setCpf(String cpf) {
-
-		String cpftemp = formataRemocaoCaracteresEspeciais(cpf);
-
-		int dig1, dig2, dig3, dig4, dig5, dig6, dig7, dig8, dig9, dig10, dig11, dv1, dv2, qDig;
-
-		if ((cpftemp.length() == 0) || (cpftemp.length() < 11)
-				|| (cpftemp.length() > 11)) {
-
-			return false;
-		}
-
-		qDig = cpftemp.length(); // Quantidade total de caracteres
-
-		// Gravar posição dos caracteres
-		try {
-			dig1 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 11)));
-			dig2 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 10)));
-			dig3 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 9)));
-			dig4 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 8)));
-			dig5 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 7)));
-			dig6 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 6)));
-			dig7 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 5)));
-			dig8 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 4)));
-			dig9 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 3)));
-			dig10 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 2)));
-			dig11 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 1)));
-		} catch (NumberFormatException e) {
-			return false;
-		}
-
-		// Cálculo para o primeiro dígito validador
-		dv1 = dig1 + (dig2 * 2) + (dig3 * 3) + (dig4 * 4) + (dig5 * 5)
-				+ (dig6 * 6) + (dig7 * 7) + (dig8 * 8) + (dig9 * 9);
-		dv1 = dv1 % 11;
-
-		if (dv1 == 10) {
-
-			dv1 = 0; // Se o resto for igual a 10, dv1 igual a zero
-		}
-
-		// Cálculo para o segundo dígito validador
-		dv2 = dig2 + (dig3 * 2) + (dig4 * 3) + (dig5 * 4) + (dig6 * 5)
-				+ (dig7 * 6) + (dig8 * 7) + (dig9 * 8) + (dv1 * 9);
-		dv2 = dv2 % 11;
-
-		if (dv2 == 10) {
-
-			dv2 = 0; // Se o resto for igual a 10, dv2 igual a zero
-		}
-
-		// Validação dos dígitos validadores, após o cálculo realizado
-		if (dig10 == dv1 && dig11 == dv2) {
-
+	
+	public void setCpf(String cpf){
 			this.cpf = cpf;
-			return true;
+	}
+
+	public static boolean validaCpf(String cpf) {
+		
+		String cpftemp = formataRemocaoCaracteresEspeciais(cpf);
+		
+		if((cpf != null)&&(cpftemp) != null){
+			int dig1, dig2, dig3, dig4, dig5, dig6, dig7, dig8, dig9, dig10, dig11, dv1, dv2, qDig;
+	
+			if ((cpftemp.length() == 0) || (cpftemp.length() < 11)
+					|| (cpftemp.length() > 11)) {
+	
+				return false;
+			}
+	
+			qDig = cpftemp.length(); // Quantidade total de caracteres
+	
+			// Gravar posição dos caracteres
+			try {
+				dig1 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 11)));
+				dig2 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 10)));
+				dig3 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 9)));
+				dig4 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 8)));
+				dig5 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 7)));
+				dig6 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 6)));
+				dig7 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 5)));
+				dig8 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 4)));
+				dig9 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 3)));
+				dig10 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 2)));
+				dig11 = Integer.parseInt(String.valueOf(cpftemp.charAt(qDig - 1)));
+			} catch (NumberFormatException e) {
+				return false;
+			}
+	
+			// Cálculo para o primeiro dígito validador
+			dv1 = dig1 + (dig2 * 2) + (dig3 * 3) + (dig4 * 4) + (dig5 * 5)
+					+ (dig6 * 6) + (dig7 * 7) + (dig8 * 8) + (dig9 * 9);
+			dv1 = dv1 % 11;
+	
+			if (dv1 == 10) {
+	
+				dv1 = 0; // Se o resto for igual a 10, dv1 igual a zero
+			}
+	
+			// Cálculo para o segundo dígito validador
+			dv2 = dig2 + (dig3 * 2) + (dig4 * 3) + (dig5 * 4) + (dig6 * 5)
+					+ (dig7 * 6) + (dig8 * 7) + (dig9 * 8) + (dv1 * 9);
+			dv2 = dv2 % 11;
+	
+			if (dv2 == 10) {
+	
+				dv2 = 0; // Se o resto for igual a 10, dv2 igual a zero
+			}
+	
+			// Validação dos dígitos validadores, após o cálculo realizado
+			if (dig10 == dv1 && dig11 == dv2) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
-		else {
+		else{
 			return false;
 		}
 		
@@ -445,17 +453,8 @@ public class Cliente {
 		
 		private static String formataRemocaoCaracteresEspeciais(String valor) {
 
-			if (valor.indexOf(",") != -1 || valor.indexOf(".") != -1
-					|| valor.indexOf("-") != -1 || valor.indexOf("/") != -1) {
-
-				StringBuffer valorAux = new StringBuffer();
-				for (int i = 0; i < valor.length(); i++)
-					if ((valor.charAt(i) != ',') && (valor.charAt(i) != '.')
-							&& (valor.charAt(i) != '-') && (valor.charAt(i) != '/'))
-						valorAux.append(valor.charAt(i));
-
-				valor = valorAux.toString();
-			}
+			valor.replaceAll("\\D", "");
+			
 			return valor;
 		}
 

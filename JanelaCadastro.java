@@ -12,80 +12,80 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 	
 	
 	//Labels
-	private JLabel lblSexo;
-	private JLabel lblEstadoCivil;
-	private JLabel lblDataDeNascimento;
-	private JLabel lblRg;
-	private JLabel lblProfisso;
-	private JLabel lblFaixaSalarial;
-	private JLabel lblTimeDeFutebol;
-	private JLabel lblLogradouro;
-	private JLabel lblNmero;
-	private JLabel lblComplemento;
-	private JLabel lblBairro;
-	private JLabel lblCep;
-	private JLabel lblCidade;
-	private JLabel lblUf;
-	private JLabel lblNome;
-	private JLabel lblReferncias;
-	private JLabel lblTelefoneResidencial;
-	private JLabel lblTelefoneCelular;
-	private JLabel lblEmail;
-	private JLabel lblTipoDePessoa;
-	private JLabel lblCpf;
-	private JLabel lblCnpj;
-	private JLabel lblMontante;
-	private JLabel lblInformaesAdicionais;
+	public JLabel lblSexo;
+	public JLabel lblEstadoCivil;
+	public JLabel lblDataDeNascimento;
+	public JLabel lblRg;
+	public JLabel lblProfisso;
+	public JLabel lblFaixaSalarial;
+	public JLabel lblTimeDeFutebol;
+	public JLabel lblLogradouro;
+	public JLabel lblNmero;
+	public JLabel lblComplemento;
+	public JLabel lblBairro;
+	public JLabel lblCep;
+	public JLabel lblCidade;
+	public JLabel lblUf;
+	public JLabel lblNome;
+	public JLabel lblReferncias;
+	public JLabel lblTelefoneResidencial;
+	public JLabel lblTelefoneCelular;
+	public JLabel lblEmail;
+	public JLabel lblTipoDePessoa;
+	public JLabel lblCpf;
+	public JLabel lblCnpj;
+	public JLabel lblMontante;
+	public JLabel lblInformaesAdicionais;
 	
 	//TextFields
-	private JTextField fieldNome;
-	private JTextField fieldProf;
-	private JTextField fieldTime;
-	private JTextField fieldLogradouro;
-	private JTextField fieldNum;
-	private JTextField fieldComplemento;
-	private JTextField fieldBairro;
-	private JTextField fieldCep;
-	private JTextField fieldCidade;
-	private JTextField fieldRef;
-	private JTextField fieldEmail;
-	private JTextField fieldMontante;
+	public JTextField fieldNome;
+	public JTextField fieldProf;
+	public JTextField fieldTime;
+	public JTextField fieldLogradouro;
+	public JTextField fieldNum;
+	public JTextField fieldComplemento;
+	public JTextField fieldBairro;
+	public JTextField fieldCep;
+	public JTextField fieldCidade;
+	public JTextField fieldRef;
+	public JTextField fieldEmail;
+	public JTextField fieldMontante;
 	
 	//TextPArea
-	private JTextArea textAreaInfoAd;
+	public JTextArea textAreaInfoAd;
 	
 	//Radioutton
-	private JRadioButton rdbtnMasculino;
-	private JRadioButton rdbtnFeminino;
-	private JRadioButton rdbtnFisica;
-	private JRadioButton rdbtnJridi;
+	public JRadioButton rdbtnMasculino;
+	public JRadioButton rdbtnFeminino;
+	public JRadioButton rdbtnFisica;
+	public JRadioButton rdbtnJridi;
 	
 	//ComboBoxes
-	private JComboBox<String> boxEstadoCivil;
-	private JComboBox<String> comboBoxFxSal;
-	private JComboBox<String> comboBoxUf;
+	public JComboBox<String> boxEstadoCivil;
+	public JComboBox<String> comboBoxFxSal;
+	public JComboBox<String> comboBoxUf;
 	
 	//Buttons
-	private JButton btnSalvar;
-	private JButton btnSair;
+	public JButton btnSalvar;
+	public JButton btnSair;
 	
 	//Formatadores
-	private JFormattedTextField fieldFormatTelRes;
-	private JFormattedTextField fieldFormatTelCel;
-	private JFormattedTextField fieldFormatDataNasc;
-	private JFormattedTextField fieldFormatRg;
-	private JFormattedTextField fieldFormatCep;
-	private JFormattedTextField fieldFormatCpf;
-	private JFormattedTextField fieldFormatCnpj;
+	public JFormattedTextField fieldFormatTelRes;
+	public JFormattedTextField fieldFormatTelCel;
+	public JFormattedTextField fieldFormatDataNasc;
+	public JFormattedTextField fieldFormatRg;
+	public JFormattedTextField fieldFormatCep;
+	public JFormattedTextField fieldFormatCpf;
+	public JFormattedTextField fieldFormatCnpj;
 	
 	//Máscaras
-	private MaskFormatter maskTelRes;
-	private MaskFormatter maskDataNasc;
-	private MaskFormatter maskRg;
-	private MaskFormatter maskCep;
-	private MaskFormatter maskTelCel;
-	private MaskFormatter maskCpf;
-	private MaskFormatter maskCnpj;
+	public MaskFormatter maskTelRes;
+	public MaskFormatter maskDataNasc;
+	public MaskFormatter maskRg;
+	public MaskFormatter maskCep;
+	public MaskFormatter maskTelCel;
+	public MaskFormatter maskCpf;
+	public MaskFormatter maskCnpj;
 	protected Container content = getContentPane();
 	
 	//Objeto
@@ -419,13 +419,25 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		fieldEmail.setToolTipText("Informe um endereço de Email válido");
 		content.add(fieldEmail);
 		
-		maskCnpj = new MaskFormatter("##.###.###/####");
+		maskCnpj = new MaskFormatter("##.###.###/####-##");
 		maskCnpj.setPlaceholderCharacter('_');
 		fieldFormatCnpj = new JFormattedTextField(maskCnpj);
 		fieldFormatCnpj.setBounds(143, 417, 200, 20);
 		fieldFormatCnpj.setToolTipText("Digite apenas números.");
 		content.add(fieldFormatCnpj);
 		fieldFormatCnpj.setVisible(false);
+		fieldFormatCnpj.setActionCommand("ValidaCPF");
+		fieldFormatCnpj.addActionListener(this);
+		fieldFormatCnpj.addFocusListener(new FocusAdapter() {  
+		    @Override  
+		    public void focusLost(FocusEvent e) {  
+		        //Se não estiver válido exibe o erro.  
+		    	boolean ok = Cliente.validaCnpj(fieldFormatCpf.getText()); 
+		    	if(!ok){
+					JOptionPane.showMessageDialog(boxEstadoCivil, "CNPJ inválido");
+				}
+		    }
+		});
 		
 		maskCpf = new MaskFormatter("###.###.###-##");
 		maskCpf.setPlaceholderCharacter('_');
@@ -434,6 +446,18 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		fieldFormatCpf.setToolTipText("Digite apenas números.");
 		content.add(fieldFormatCpf);
 		fieldFormatCpf.setVisible(false);
+		fieldFormatCpf.addFocusListener(new FocusAdapter() {  
+		    @Override  
+		    public void focusLost(FocusEvent e) {  
+		        //Se não estiver válido exibe o erro.  
+		    	boolean ok = Cliente.validaCpf(fieldFormatCpf.getText()); 
+		    	if(!ok){
+					JOptionPane.showMessageDialog(boxEstadoCivil, "CPF inválido");
+				}
+		    }
+		}); 
+		
+		
 		
 		fieldMontante = new JTextField();
 		fieldMontante.setBounds(143, 510, 104, 20);
@@ -486,7 +510,7 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 
 	}
 	
-	private void limparTela(){
+	public void limparTela(){
 		
 		//Limpar Campos de JTextField
 		fieldBairro.setText(null);
@@ -516,15 +540,15 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		rdbtnJridi.setSelected(false);
 	}
 
-	private boolean verificaDados(){
+	public boolean verificaDados(){
 		
 		boolean aux;
 		
 		if((fieldNome.getText() == null) || ((!rdbtnFeminino.isSelected())&&(!rdbtnMasculino.isSelected())) ||
 				(fieldFormatRg.getText() == null) || (fieldProf.getText() == null) || (fieldLogradouro.getText() == null) ||
 				(fieldNum.getText() == null) || (fieldCidade.getText() == null) || ((!rdbtnFisica.isSelected())&&(!rdbtnJridi.isSelected()))
-				|| (!c.setDataNasc(fieldFormatDataNasc.getText())) || (!c.setCpf(fieldFormatCpf.getText()))
-				||(!c.setCnpj(fieldFormatCnpj.getText()))){
+				|| (!c.setDataNasc(fieldFormatDataNasc.getText())) || (!Cliente.validaCpf(fieldFormatCpf.getText()))
+				||(Cliente.validaCnpj(fieldFormatCnpj.getText()))){
 			aux = false;
 		}
 		else if(rdbtnFisica.isSelected()){
@@ -550,6 +574,7 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		
 	}
 	
+	
 	public static void main(String[] args) throws ParseException {
 		new JanelaCadastro();
 
@@ -572,10 +597,6 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 			fieldFormatCpf.setVisible(false);
 			lblCnpj.setVisible(true);
 			fieldFormatCnpj.setVisible(true);
-		}
-		
-		if(Cliente.getVectorC().isEmpty()){
-			JOptionPane.showMessageDialog(boxEstadoCivil, "Não tem nenhum cliente cadastrado");
 		}
 		
 		if(comand.equals("SP")){
@@ -627,14 +648,13 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 				 * Nome, Bairro, Celular, Cep, Cidade, Cnpj, Comp, Cpf, Data de Nascimento, Logradouro, Montante, Número,
 				 * Profissão, Referência, RG, Telefone Fixo, Celular, Time de Futebol e Email.
 				 */
+				
 				c.setNome(fieldNome.getText());
 				c.setBairro(fieldBairro.getText());
 				c.setCelular(fieldFormatTelCel.getText());
 				c.setCep(fieldFormatCep.getText());
 				c.setCidade(fieldCidade.getText());
-				c.setCnpj("111111111");
 				c.setComp(fieldComplemento.getText());
-				c.setCpf("11111111111");
 				c.setDataNasc(fieldFormatDataNasc.getText());
 				c.setLogradouro(fieldLogradouro.getText());
 				c.setMontante(fieldMontante.getText());
@@ -645,6 +665,8 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 				c.setTelFixo(fieldFormatTelRes.getText());
 				c.setTimeFutebol(fieldTime.getText());
 				c.setTipoEmail(fieldEmail.getText());
+				c.setCpf(fieldFormatCpf.getText());
+				c.setCNPJ(fieldFormatCnpj.getText());
 				
 				/*
 				 * Adiciona o objeto c ao vetor na posição do ID. 
@@ -671,6 +693,9 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 			
 			if(!verificaDados()){
 				JOptionPane.showMessageDialog(boxEstadoCivil, "Um ou mais campos obrigatórios não foram preenchidos.");
+			}
+			else if(Cliente.getVectorC().isEmpty()){
+				JOptionPane.showMessageDialog(boxEstadoCivil, "Não tem nenhum cliente cadastrado");
 			}
 						
 		}
