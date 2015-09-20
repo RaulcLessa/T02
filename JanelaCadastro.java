@@ -442,7 +442,7 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 		    @Override  
 		    public void focusLost(FocusEvent e) {  
 		        //Se não estiver válido exibe o erro.  
-		    	boolean ok = Cliente.validaCnpj(fieldFormatCpf.getText()); 
+		    	boolean ok = Cliente.validaCnpj(fieldFormatCnpj.getText()); 
 		    	if(!ok){
 					JOptionPane.showMessageDialog(boxEstadoCivil, "CNPJ inválido");
 				}
