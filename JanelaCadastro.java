@@ -688,10 +688,18 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 				c.incrementaID();
 				limparTela();
 				Cliente.setVectorC(c.getID(), c);
-				System.out.println("Posição atual " + Cliente.getVectorC().get(c.getID()).getNome() + " " +c.getID());
-				System.out.println("Data " + Cliente.getVectorC().get(c.getID()).getDataNasc());
-				System.out.println("Cpf " + Cliente.getVectorC().get(c.getID()).getCPF());
-				
+				System.out.println("---- Dados Obrigatórios ----");
+				System.out.println("Posição atual : " + Cliente.getVectorC().get(c.getID()).getNome() + " " +c.getID());
+				System.out.println("Sexo : " + Cliente.getVectorC().get(c.getID()).getSexo());
+				System.out.println("RG : " + Cliente.getVectorC().get(c.getID()).getRG());
+				System.out.println("Profissão : " + Cliente.getVectorC().get(c.getID()).getProfissao());
+				System.out.println("Faixa Salarial : " + Cliente.getVectorC().get(c.getID()).getSalario());
+				System.out.println("Logradouro : " + Cliente.getVectorC().get(c.getID()).getLogradouro());
+				System.out.println("Número : " + Cliente.getVectorC().get(c.getID()).getNumero());
+				System.out.println("Cidade : " + Cliente.getVectorC().get(c.getID()).getCidade());
+				System.out.println("UF : " + Cliente.getVectorC().get(c.getID()).getUF());
+				System.out.println("CPF : " + Cliente.getVectorC().get(c.getID()).getCpf());
+				System.out.println("CNPJ : " + Cliente.getVectorC().get(c.getID()).getCnpj());
 				
 				System.out.println("Posição " + Cliente.getVectorC().get(0).getNome() + " 0");
 			}
