@@ -551,35 +551,31 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 
 	public boolean verificaDados(){
 		
-		boolean aux;
-		
-		if((fieldNome.getText() == null) || ((!rdbtnFeminino.isSelected())&&(!rdbtnMasculino.isSelected())) ||
-				(fieldFormatRg.getText() == null) || (fieldProf.getText() == null) || (fieldLogradouro.getText() == null) ||
-				(fieldNum.getText() == null) || (fieldCidade.getText() == null) || ((!rdbtnFisica.isSelected())&&(!rdbtnJridi.isSelected()))
-				|| (!Cliente.validaDataNasc(fieldFormatDataNasc.getText())) || (!Cliente.validaCpf(fieldFormatCpf.getText()))
-				||(!Cliente.validaCnpj(fieldFormatCnpj.getText()))){
-			aux = false;
-		}
-		else if(rdbtnFisica.isSelected()){
-			if(fieldFormatCpf.getText() == null){
-				aux = false;
+		if((fieldFormatRg.getText().equals("         ")) || (fieldNome.getText() == null) 
+				|| ((!rdbtnMasculino.isSelected())&&(!rdbtnFeminino.isSelected()))
+				|| (fieldProf.getText() == null)
+				|| (fieldLogradouro.getText() == null)
+				|| (fieldNum.getText() == null)
+				|| (fieldCidade.getText() == null)
+				|| ((!rdbtnFisica.isSelected())&&(!rdbtnJridi.isSelected()))){
+			if(rdbtnFisica.isSelected()){
+				boolean ok = Cliente.validaCpf(fieldFormatCpf.getText());
+				if(!ok){
+					return false;
+				}
 			}
-			else{
-				aux = true;
+			else if(rdbtnJridi.isSelected()){
+				boolean ok = Cliente.validaCnpj(fieldFormatCnpj.getText());
+				if(!ok){
+					return false;
+				}
 			}
-		}
-		else if(rdbtnJridi.isSelected()){
-			if(fieldFormatCnpj.getText() == null){
-				aux = false;
-			}
-			else{
-				aux = true;
-			}
+			
+			return false;
 		}
 		else{
-			aux = false;
+			return true;
 		}
-		return aux;
 		
 	}
 	
@@ -699,13 +695,13 @@ public class JanelaCadastro extends JFrame implements ActionListener {
 				
 				System.out.println("Posição " + Cliente.getVectorC().get(0).getNome() + " 0");
 			}
-			
-			if(!verificaDados()){
-				JOptionPane.showMessageDialog(boxEstadoCivil, "Um ou mais campos obrigatórios não foram preenchidos.");
-			}
 			else if(Cliente.getVectorC().isEmpty()){
 				JOptionPane.showMessageDialog(boxEstadoCivil, "Não tem nenhum cliente cadastrado");
 			}
+			else{
+				JOptionPane.showMessageDialog(boxEstadoCivil, "Um ou mais campos obrigatórios não foram preenchidos.");
+			}
+			
 						
 		}
 		

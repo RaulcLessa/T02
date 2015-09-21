@@ -281,6 +281,15 @@ public class Cliente {
 		return RG;
 	}
 
+	public static boolean validaRG(String RG){
+		RG = RG.replaceAll("\\D", "");
+		
+		boolean aux = RG.matches("\\d{10}");
+		
+		return aux;
+		
+	}
+	
 	public void setRG(String rG) {
 		RG = rG;
 	}
